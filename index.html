@@ -5,51 +5,686 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Officer's Nexus Quiz System</title>
     <style>
-        /* YAHI PE APKA PURA CSS CODE AAYEGA */
-        body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        /* COMPLETE CSS CODE */
+        :root {
+            --primary: #667eea;
+            --secondary: #764ba2;
+            --success: #48bb78;
+            --danger: #f56565;
+            --warning: #ed8936;
+            --dark: #2d3748;
+            --light: #f7fafc;
+            --gray: #718096;
+        }
+        
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
-        /* ... REST CSS ... */
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: var(--dark);
+            min-height: 100vh;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .app {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background: var(--light);
+        }
+
+        /* Header Styles */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid #e2e8f0;
+            padding: 0 20px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .logo-text {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .logo-subtext {
+            font-size: 10px;
+            color: var(--gray);
+            margin-top: -2px;
+        }
+
+        /* Main Content */
+        .main {
+            flex: 1;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* Card Styles */
+        .card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+        }
+
+        .card-header {
+            padding: 20px;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #f8fafc;
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin: 0;
+            color: var(--dark);
+        }
+
+        .card-body {
+            padding: 24px;
+        }
+
+        /* Button Styles */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            min-height: 44px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--dark);
+            border: 2px solid #e2e8f0;
+        }
+
+        .btn-secondary:hover {
+            background: #f8fafc;
+            border-color: var(--primary);
+        }
+
+        .btn-success {
+            background: var(--success);
+            color: white;
+        }
+
+        .btn-danger {
+            background: var(--danger);
+            color: white;
+        }
+
+        .btn-sm {
+            padding: 8px 16px;
+            font-size: 12px;
+            min-height: 36px;
+        }
+
+        .btn-block {
+            width: 100%;
+        }
+
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark);
+            font-size: 14px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px 16px;
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            color: var(--dark);
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .form-select {
+            width: 100%;
+            padding: 12px 16px;
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            color: var(--dark);
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        /* Grid System */
+        .grid {
+            display: grid;
+            gap: 20px;
+        }
+
+        .grid-2 {
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        }
+
+        .grid-3 {
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        }
+
+        /* Utility Classes */
+        .hidden { display: none !important; }
+        .text-center { text-align: center; }
+        .text-right { text-align: right; }
+        .w-full { width: 100%; }
+        .mb-0 { margin-bottom: 0; }
+        .mt-4 { margin-top: 24px; }
+        .flex { display: flex; }
+        .items-center { align-items: center; }
+        .justify-between { justify-content: space-between; }
+        .gap-4 { gap: 24px; }
+
+        /* Animation */
+        .fade-in {
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main {
+                padding: 16px;
+            }
+            
+            .card-body {
+                padding: 20px;
+            }
+            
+            .grid-2, .grid-3 {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="app">
-        <!-- HEADER -->
+        <!-- Header -->
         <header class="header">
             <div class="logo">
                 <div class="logo-icon">◆</div>
                 <div>
-                    <div style="font-size: 16px; font-weight: 600; color: #4a5568;">Officer's Nexus</div>
-                    <div style="font-size: 9px; color: #718096; margin-top: -2px;">@officersnexus</div>
+                    <div class="logo-text">Officer's Nexus</div>
+                    <div class="logo-subtext">@officersnexus</div>
                 </div>
             </div>
-            <!-- ... REST HEADER CODE ... -->
+            <div class="header-actions">
+                <button class="btn btn-secondary btn-sm" onclick="toggleTheme()">
+                    <span>🌙</span> Theme
+                </button>
+            </div>
         </header>
 
-        <!-- MAIN CONTENT -->
+        <!-- Main Content -->
         <main class="main">
-            <!-- LOGIN SCREEN -->
-            <div id="loginScreen" class="fade-in">
-                <!-- ... LOGIN CODE ... -->
+            <!-- Login Screen -->
+            <div id="loginScreen">
+                <div class="card fade-in">
+                    <div class="card-header">
+                        <h1 class="card-title">Welcome to Officer's Nexus</h1>
+                    </div>
+                    <div class="card-body">
+                        <div class="grid grid-2">
+                            <!-- Student Portal -->
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">🎓 Student Portal</h3>
+                                </div>
+                                <div class="card-body">
+                                    <p style="color: var(--gray); margin-bottom: 20px;">
+                                        Access quizzes, track progress, and view rankings
+                                    </p>
+                                    <div class="form-group">
+                                        <label class="form-label">Your Name</label>
+                                        <input type="text" class="form-input" id="studentName" 
+                                               placeholder="Enter your full name">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Exam Type</label>
+                                        <select class="form-select" id="studentExamType">
+                                            <option value="">Select exam type</option>
+                                            <option value="UPSC">UPSC Civil Services</option>
+                                            <option value="State PSC">State PSC</option>
+                                            <option value="SSC">SSC</option>
+                                            <option value="Banking">Banking</option>
+                                            <option value="Other">Other</option>
+                                        </select>
+                                    </div>
+                                    <button class="btn btn-primary btn-block" onclick="login('student')">
+                                        <span>🚀</span> Enter Student Portal
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Maker Portal -->
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">⚙️ Maker Portal</h3>
+                                </div>
+                                <div class="card-body">
+                                    <p style="color: var(--gray); margin-bottom: 20px;">
+                                        Create quizzes, manage content, and analyze results
+                                    </p>
+                                    <div class="form-group">
+                                        <label class="form-label">Maker Name</label>
+                                        <input type="text" class="form-input" id="makerName" 
+                                               placeholder="Enter your name">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Department</label>
+                                        <select class="form-select" id="makerDepartment">
+                                            <option value="">Select department</option>
+                                            <option value="Physics">Physics</option>
+                                            <option value="Mathematics">Mathematics</option>
+                                            <option value="General Studies">General Studies</option>
+                                            <option value="Current Affairs">Current Affairs</option>
+                                            <option value="Other">Other</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Maker Password</label>
+                                        <input type="password" class="form-input" id="makerPassword" 
+                                               placeholder="Enter maker password">
+                                    </div>
+                                    
+                                    <!-- Admin Access -->
+                                    <div class="form-group" style="border-top: 1px solid #e2e8f0; padding-top: 16px;">
+                                        <label class="form-label">🔐 Admin Secret Access</label>
+                                        <input type="password" class="form-input" id="adminSecret" 
+                                               placeholder="Enter admin secret key">
+                                        <button class="btn btn-danger btn-block mt-4" onclick="login('admin')">
+                                            <span>🛡️</span> Access Admin Panel
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            
-            <!-- ... ALL OTHER SCREENS ... -->
+
+            <!-- Student Dashboard -->
+            <div id="studentDashboard" class="hidden">
+                <div class="card fade-in">
+                    <div class="card-header">
+                        <h2 class="card-title">🎓 Student Dashboard</h2>
+                        <div class="flex gap-4">
+                            <button class="btn btn-secondary btn-sm" onclick="showScreen('importQuiz')">
+                                <span>📥</span> Import Quiz
+                            </button>
+                            <button class="btn btn-primary btn-sm" onclick="logout()">
+                                <span>🚪</span> Logout
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="grid grid-3">
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    <div style="font-size: 32px; margin-bottom: 8px;">📊</div>
+                                    <h3 style="margin-bottom: 8px;">My Progress</h3>
+                                    <p style="color: var(--gray); font-size: 12px;">
+                                        View your quiz attempts and performance analytics
+                                    </p>
+                                    <button class="btn btn-primary btn-block mt-4" onclick="viewProgress()">
+                                        View Progress
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    <div style="font-size: 32px; margin-bottom: 8px;">🏆</div>
+                                    <h3 style="margin-bottom: 8px;">Rankings</h3>
+                                    <p style="color: var(--gray); font-size: 12px;">
+                                        Check your position in overall rankings
+                                    </p>
+                                    <button class="btn btn-primary btn-block mt-4" onclick="viewRankings()">
+                                        View Rankings
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    <div style="font-size: 32px; margin-bottom: 8px;">📚</div>
+                                    <h3 style="margin-bottom: 8px;">Available Quizzes</h3>
+                                    <p style="color: var(--gray); font-size: 12px;">
+                                        Attempt new quizzes and tests
+                                    </p>
+                                    <button class="btn btn-primary btn-block mt-4" onclick="showAvailableQuizzes()">
+                                        Browse Quizzes
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Maker Dashboard -->
+            <div id="makerDashboard" class="hidden">
+                <div class="card fade-in">
+                    <div class="card-header">
+                        <h2 class="card-title">⚙️ Maker Dashboard</h2>
+                        <div class="flex gap-4">
+                            <button class="btn btn-secondary btn-sm" onclick="showScreen('analytics')">
+                                <span>📈</span> Analytics
+                            </button>
+                            <button class="btn btn-primary btn-sm" onclick="logout()">
+                                <span>🚪</span> Logout
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="grid grid-3">
+                            <button class="btn btn-primary" style="flex-direction: column; height: 120px;" 
+                                    onclick="showScreen('createQuiz')">
+                                <span style="font-size: 24px;">➕</span>
+                                <span>Create Quiz</span>
+                            </button>
+                            
+                            <button class="btn btn-secondary" style="flex-direction: column; height: 120px;" 
+                                    onclick="showScreen('manageQuizzes')">
+                                <span style="font-size: 24px;">📋</span>
+                                <span>Manage Quizzes</span>
+                            </button>
+                            
+                            <button class="btn btn-secondary" style="flex-direction: column; height: 120px;" 
+                                    onclick="showScreen('bulkRanking')">
+                                <span style="font-size: 24px;">🏆</span>
+                                <span>Bulk Ranking</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Admin Dashboard -->
+            <div id="adminDashboard" class="hidden">
+                <div class="card fade-in">
+                    <div class="card-header">
+                        <h2 class="card-title">🛡️ Admin Control Panel</h2>
+                        <div class="flex gap-4">
+                            <button class="btn btn-danger btn-sm" onclick="logout()">
+                                <span>🚪</span> Logout
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="grid grid-3">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">👥 User Management</h3>
+                                </div>
+                                <div class="card-body">
+                                    <p style="color: var(--gray); margin-bottom: 16px;">
+                                        Manage makers and student access
+                                    </p>
+                                    <button class="btn btn-primary btn-block" onclick="manageUsers()">
+                                        Manage Users
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">⚙️ System Settings</h3>
+                                </div>
+                                <div class="card-body">
+                                    <p style="color: var(--gray); margin-bottom: 16px;">
+                                        Configure system-wide settings
+                                    </p>
+                                    <button class="btn btn-primary btn-block" onclick="systemSettings()">
+                                        Open Settings
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">📊 Analytics</h3>
+                                </div>
+                                <div class="card-body">
+                                    <p style="color: var(--gray); margin-bottom: 16px;">
+                                        View system-wide analytics and reports
+                                    </p>
+                                    <button class="btn btn-primary btn-block" onclick="systemAnalytics()">
+                                        View Analytics
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </main>
     </div>
 
     <script>
-        // YAHI PE APKA PURA JAVASCRIPT CODE AAYEGA
+        // Global State Management
         let currentUser = null;
         let currentScreen = 'loginScreen';
-        
-        function login(userType) {
-            // ... LOGIN LOGIC ...
+        let userRole = null;
+
+        // Password Configuration
+        const PASSWORDS = {
+            maker: 'maker2024',
+            admin: 'officersnexus@2024'
+        };
+
+        // Initialize Application
+        function init() {
+            showScreen('loginScreen');
+            checkExistingSession();
         }
-        
-        // ... REST JAVASCRIPT FUNCTIONS ...
+
+        // Login Function
+        function login(role) {
+            const nameField = role === 'student' ? 'studentName' : 'makerName';
+            const name = document.getElementById(nameField).value.trim();
+            
+            if (!name) {
+                alert('Please enter your name');
+                return;
+            }
+
+            if (role === 'maker') {
+                const password = document.getElementById('makerPassword').value;
+                if (password !== PASSWORDS.maker) {
+                    alert('Invalid maker password');
+                    return;
+                }
+            }
+
+            if (role === 'admin') {
+                const secret = document.getElementById('adminSecret').value;
+                if (secret !== PASSWORDS.admin) {
+                    alert('Invalid admin secret');
+                    return;
+                }
+                role = 'admin';
+            }
+
+            // Set user session
+            currentUser = {
+                name: name,
+                role: role,
+                loginTime: new Date().toISOString()
+            };
+
+            // Save to localStorage
+            localStorage.setItem('currentUser', JSON.stringify(currentUser));
+
+            // Redirect to dashboard
+            switch(role) {
+                case 'student':
+                    showScreen('studentDashboard');
+                    break;
+                case 'maker':
+                    showScreen('makerDashboard');
+                    break;
+                case 'admin':
+                    showScreen('adminDashboard');
+                    break;
+            }
+        }
+
+        // Screen Navigation
+        function showScreen(screenId) {
+            // Hide all screens
+            document.querySelectorAll('[id$="Screen"], [id$="Dashboard"]').forEach(screen => {
+                screen.classList.add('hidden');
+            });
+            
+            // Show target screen
+            document.getElementById(screenId).classList.remove('hidden');
+            currentScreen = screenId;
+        }
+
+        // Logout Function
+        function logout() {
+            currentUser = null;
+            userRole = null;
+            localStorage.removeItem('currentUser');
+            showScreen('loginScreen');
+            
+            // Clear form fields
+            document.getElementById('studentName').value = '';
+            document.getElementById('makerName').value = '';
+            document.getElementById('makerPassword').value = '';
+            document.getElementById('adminSecret').value = '';
+        }
+
+        // Check Existing Session
+        function checkExistingSession() {
+            const savedUser = localStorage.getItem('currentUser');
+            if (savedUser) {
+                currentUser = JSON.parse(savedUser);
+                showScreen(currentUser.role + 'Dashboard');
+            }
+        }
+
+        // Theme Toggle
+        function toggleTheme() {
+            document.body.classList.toggle('dark-theme');
+            // Theme persistence can be added here
+        }
+
+        // Placeholder Functions for Features
+        function viewProgress() {
+            alert('Progress tracking feature coming soon!');
+        }
+
+        function viewRankings() {
+            alert('Rankings feature coming soon!');
+        }
+
+        function showAvailableQuizzes() {
+            alert('Available quizzes feature coming soon!');
+        }
+
+        function manageUsers() {
+            alert('User management feature coming soon!');
+        }
+
+        function systemSettings() {
+            alert('System settings feature coming soon!');
+        }
+
+        function systemAnalytics() {
+            alert('System analytics feature coming soon!');
+        }
+
+        // Initialize app when page loads
+        window.addEventListener('load', init);
     </script>
 </body>
 </html>

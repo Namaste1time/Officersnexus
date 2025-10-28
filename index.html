@@ -4,16 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Officer's Nexus</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
     <style>
+        /* Facebook-inspired Color Scheme */
         :root {
-            --primary: #1877f2;
-            --secondary: #42b72a;
-            --dark: #1c1e21;
-            --light: #f0f2f5;
-            --gray: #8a8d91;
-            --white: #ffffff;
+            --fb-blue: #1877f2;
+            --fb-blue-dark: #166fe5;
+            --fb-green: #42b72a;
+            --fb-green-dark: #36a420;
+            --fb-gray-1: #f0f2f5;
+            --fb-gray-2: #e4e6eb;
+            --fb-gray-3: #dadde1;
+            --fb-gray-4: #8a8d91;
+            --fb-gray-5: #65676b;
+            --fb-gray-6: #4b4c4f;
+            --fb-text: #1c1e21;
+            --fb-white: #ffffff;
+            --fb-red: #fa383e;
+            --fb-orange: #f7b928;
         }
 
+        /* CSS Reset and Global Styles */
         * {
             margin: 0;
             padding: 0;
@@ -21,488 +34,3948 @@
         }
 
         body {
-            font-family: Helvetica, Arial, sans-serif;
-            background: var(--light);
-            color: var(--dark);
-            min-height: 100vh;
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--fb-gray-1);
+            color: var(--fb-text);
+            line-height: 1.5;
         }
 
-        .container {
+        /* Facebook-style Header */
+        .header-bar {
+            width: 100%;
+            height: 60px;
+            background-color: var(--fb-white);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
             display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            padding: 20px;
-            max-width: 400px;
-            margin: 0 auto;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 0 16px;
+            border-bottom: 1px solid var(--fb-gray-3);
         }
 
-        .header {
-            text-align: center;
-            margin: 40px 0;
-        }
-
-        .logo {
-            font-size: 32px;
-            font-weight: bold;
-            color: var(--primary);
-            margin-bottom: 8px;
-        }
-
-        .tagline {
-            color: var(--gray);
-            font-size: 14px;
-        }
-
-        .login-box {
-            background: var(--white);
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
-        }
-
-        .form-group {
-            margin-bottom: 16px;
-        }
-
-        .form-input {
-            width: 100%;
-            padding: 14px 16px;
-            border: 1px solid #dddfe2;
-            border-radius: 6px;
-            font-size: 17px;
-            background: var(--white);
-        }
-
-        .form-input:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 2px rgba(24, 119, 242, 0.2);
-        }
-
-        .login-btn {
-            width: 100%;
-            padding: 12px;
-            background: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 6px;
-            font-size: 20px;
-            font-weight: bold;
-            cursor: pointer;
-            margin-bottom: 16px;
-        }
-
-        .login-btn:hover {
-            background: #166fe5;
-        }
-
-        .forgot-link {
-            text-align: center;
-            display: block;
-            color: var(--primary);
+        .nexus-branding-box {
             text-decoration: none;
-            font-size: 14px;
-            margin-bottom: 20px;
-        }
-
-        .divider {
-            border-bottom: 1px solid #dadde1;
-            margin: 20px 0;
-        }
-
-        .create-btn {
-            width: auto;
-            padding: 12px 16px;
-            background: var(--secondary);
-            color: white;
-            border: none;
-            border-radius: 6px;
-            font-size: 17px;
-            font-weight: bold;
+            display: flex;
+            align-items: center;
             cursor: pointer;
-            margin: 0 auto;
+            transition: opacity 0.3s;
+        }
+
+        .header-text {
+            font-family: 'Roboto Slab', serif;
+            font-weight: 700;
+            font-size: 20px;
+            color: var(--fb-blue);
+            letter-spacing: 0.5px;
+        }
+
+        .subheader-text {
+            font-family: 'Roboto', sans-serif;
+            font-size: 12px;
+            color: var(--fb-gray-4);
+            margin-top: 1px;
+        }
+
+        .text-content {
+            display: block;
+            line-height: 1.2;
+        }
+
+        /* Login Modal Branding */
+        .login-branding {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            padding: 15px;
+            border-bottom: 1px solid var(--fb-gray-2);
+        }
+
+        .login-logo {
+            width: 50px;
+            height: 50px;
+            background-color: var(--fb-blue);
+            color: var(--fb-white);
+            font-weight: 700;
+            font-size: 24px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            margin-right: 15px;
+            font-family: 'Roboto Slab', serif;
+        }
+
+        .login-brand-text {
+            text-align: center;
+        }
+
+        .login-header-text {
+            font-family: 'Roboto Slab', serif;
+            font-weight: 700;
+            font-size: 24px;
+            color: var(--fb-blue);
+        }
+
+        .login-subheader-text {
+            font-family: 'Roboto', sans-serif;
+            font-size: 14px;
+            color: var(--fb-gray-4);
+        }
+
+        /* Header Controls */
+        .header-controls {
+            display: flex;
+            align-items: center;
+        }
+
+        /* Sort Button - Small Symbolic */
+        #sortButton {
+            background: none;
+            border: none;
+            color: var(--fb-gray-5);
+            font-size: 16px;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 50%;
+            transition: background-color 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        #sortButton:hover {
+            background-color: var(--fb-gray-2);
+        }
+
+        /* Hamburger Menu */
+        .hamburger-menu {
+            display: none;
+            position: relative;
+        }
+
+        .hamburger-btn {
+            background: none;
+            border: none;
+            color: var(--fb-gray-5);
+            font-size: 24px;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 50%;
+            transition: background-color 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+        }
+
+        .hamburger-btn:hover {
+            background-color: var(--fb-gray-2);
+        }
+
+        .mobile-dropdown {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 50px;
+            background-color: var(--fb-white);
+            min-width: 250px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            z-index: 10;
+            border-radius: 8px;
+            overflow: hidden;
+            padding: 8px 0;
+        }
+
+        .mobile-dropdown.show {
             display: block;
         }
 
-        .create-btn:hover {
-            background: #36a420;
+        .mobile-menu-item {
+            color: var(--fb-text);
+            padding: 12px 16px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.2s;
         }
 
-        .hidden { display: none; }
-        .text-center { text-align: center; }
-        .error-message {
-            color: #f02849;
-            font-size: 13px;
+        .mobile-menu-item:hover {
+            background-color: var(--fb-gray-1);
+        }
+
+        .mobile-menu-item i {
+            margin-right: 12px;
+            width: 20px;
             text-align: center;
+            color: var(--fb-gray-5);
+        }
+
+        .mobile-menu-item.logout {
+            color: var(--fb-red);
+            border-top: 1px solid var(--fb-gray-2);
             margin-top: 8px;
         }
 
-        /* Dashboard Styles */
-        .dashboard {
-            background: var(--white);
+        .mobile-menu-item.logout i {
+            color: var(--fb-red);
+        }
+
+        /* Dropdown Menu */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 16px;
+            top: 55px;
+            background-color: var(--fb-white);
+            min-width: 280px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            z-index: 10;
             border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             overflow: hidden;
+            padding: 8px 0;
         }
 
-        .dashboard-header {
-            background: var(--primary);
-            color: white;
-            padding: 20px;
+        .dropdown-content.show {
+            display: block;
+        }
+
+        .dropdown-item {
+            color: var(--fb-text);
+            padding: 12px 16px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .dropdown-item:hover {
+            background-color: var(--fb-gray-1);
+        }
+
+        .dropdown-item i {
+            margin-right: 12px;
+            width: 20px;
             text-align: center;
+            color: var(--fb-gray-5);
         }
 
-        .dashboard-body {
+        .dropdown-item.logout {
+            color: var(--fb-red);
+            border-top: 1px solid var(--fb-gray-2);
+            margin-top: 8px;
+        }
+
+        .dropdown-item.logout i {
+            color: var(--fb-red);
+        }
+
+        /* Tabs Navigation */
+        .tabs-container {
+            background-color: var(--fb-white);
+            border-bottom: 1px solid var(--fb-gray-3);
+            padding: 0 16px;
+            position: sticky;
+            top: 60px;
+            z-index: 900;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        .tabs {
+            display: flex;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .tab {
+            padding: 16px 20px;
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--fb-gray-5);
+            cursor: pointer;
+            border: none;
+            background: none;
+            border-bottom: 3px solid transparent;
+            transition: all 0.2s;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            flex: 1;
+            justify-content: center;
+        }
+
+        .tab i {
+            margin-right: 8px;
+        }
+
+        .tab:hover {
+            color: var(--fb-blue);
+            background-color: var(--fb-gray-1);
+        }
+
+        .tab.active {
+            color: var(--fb-blue);
+            border-bottom: 3px solid var(--fb-blue);
+        }
+
+        /* Main Content Layout - Facebook Style */
+        .main-container {
+            display: flex;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 16px;
+            gap: 20px;
+            margin-top: 120px; /* Fixed: Header + Tabs height */
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .content-section {
+            display: none;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        .content-card {
+            background-color: var(--fb-white);
+            border-radius: 8px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
             padding: 20px;
-        }
-
-        .user-info {
-            text-align: center;
             margin-bottom: 20px;
         }
 
-        .username {
-            font-size: 24px;
-            font-weight: bold;
-            color: var(--dark);
+        .content-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--fb-gray-2);
         }
 
-        .role-badge {
-            display: inline-block;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: bold;
-            margin-top: 8px;
+        .content-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--fb-text);
         }
 
-        .student-badge { background: #e7f3ff; color: var(--primary); }
-        .maker-badge { background: #fff4e6; color: #e67e22; }
-        .admin-badge { background: #ffe6e6; color: #e74c3c; }
-
-        .action-grid {
-            display: grid;
-            gap: 12px;
+        .content-actions {
+            display: flex;
+            gap: 8px;
         }
 
         .action-btn {
-            padding: 12px;
-            border: 1px solid #dddfe2;
-            border-radius: 6px;
-            background: var(--white);
-            cursor: pointer;
-            text-align: left;
+            background: var(--fb-gray-2);
+            border: none;
+            color: var(--fb-gray-6);
             font-size: 14px;
+            cursor: pointer;
+            padding: 6px 12px;
+            border-radius: 6px;
+            transition: background-color 0.2s;
+            display: flex;
+            align-items: center;
         }
 
         .action-btn:hover {
-            background: var(--light);
+            background-color: var(--fb-gray-3);
         }
 
-        .logout-btn {
+        .action-btn.primary {
+            background-color: var(--fb-blue);
+            color: var(--fb-white);
+        }
+
+        .action-btn.primary:hover {
+            background-color: var(--fb-blue-dark);
+        }
+
+        .action-btn i {
+            margin-right: 6px;
+        }
+
+        /* Info Cards */
+        .info-card {
+            background-color: var(--fb-white);
+            border-radius: 8px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            padding: 16px;
+            margin-bottom: 16px;
+            border-left: 4px solid var(--fb-blue);
+        }
+
+        .info-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 8px;
+        }
+
+        .info-title {
+            font-weight: 600;
+            color: var(--fb-text);
+            margin-bottom: 4px;
+            font-size: 16px;
+        }
+
+        .info-meta {
+            font-size: 12px;
+            color: var(--fb-gray-4);
+            margin-bottom: 8px;
+        }
+
+        .info-content {
+            font-size: 14px;
+            color: var(--fb-text);
+            line-height: 1.5;
+        }
+
+        .info-actions {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 12px;
+            gap: 8px;
+        }
+
+        .info-btn {
+            background: none;
+            border: none;
+            color: var(--fb-gray-5);
+            cursor: pointer;
+            font-size: 12px;
+            padding: 4px 8px;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+
+        .info-btn:hover {
+            background-color: var(--fb-gray-1);
+        }
+
+        .info-btn.delete {
+            color: var(--fb-red);
+        }
+
+        /* Quiz Cards */
+        .quiz-card {
+            background-color: var(--fb-white);
+            border-radius: 8px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            padding: 16px;
+            margin-bottom: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .quiz-details {
+            flex: 1;
+        }
+
+        .quiz-title {
+            font-weight: 600;
+            color: var(--fb-text);
+            margin-bottom: 4px;
+            font-size: 16px;
+        }
+
+        .quiz-meta {
+            font-size: 12px;
+            color: var(--fb-gray-4);
+            display: flex;
+            gap: 12px;
+        }
+
+        .quiz-actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        .quiz-btn {
+            background: var(--fb-gray-2);
+            border: none;
+            color: var(--fb-gray-6);
+            font-size: 12px;
+            cursor: pointer;
+            padding: 6px 10px;
+            border-radius: 6px;
+            transition: background-color 0.2s;
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+        }
+
+        .quiz-btn:hover {
+            background-color: var(--fb-gray-3);
+        }
+
+        .quiz-btn.primary {
+            background-color: var(--fb-blue);
+            color: var(--fb-white);
+        }
+
+        .quiz-btn.primary:hover {
+            background-color: var(--fb-blue-dark);
+        }
+
+        .quiz-btn.success {
+            background-color: var(--fb-green);
+            color: var(--fb-white);
+        }
+
+        .quiz-btn.success:hover {
+            background-color: var(--fb-green-dark);
+        }
+
+        .quiz-btn i {
+            margin-right: 4px;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
             width: 100%;
-            padding: 12px;
-            background: var(--light);
-            color: var(--dark);
-            border: 1px solid #dddfe2;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+        }
+
+        .modal-content {
+            background-color: var(--fb-white);
+            margin: 5% auto;
+            padding: 0;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+        }
+
+        .modal-header {
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--fb-gray-2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--fb-text);
+        }
+
+        .close {
+            color: var(--fb-gray-4);
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .close:hover {
+            color: var(--fb-text);
+        }
+
+        .modal-body {
+            padding: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 16px;
+        }
+
+        .input-label {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 14px;
+            color: var(--fb-text);
+            font-weight: 500;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid var(--fb-gray-3);
+            border-radius: 6px;
+            font-size: 14px;
+            transition: border-color 0.2s;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: var(--fb-blue);
+        }
+
+        .btn {
+            width: 100%;
+            background-color: var(--fb-blue);
+            color: var(--fb-white);
+            padding: 10px;
+            border: none;
             border-radius: 6px;
             cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: background-color 0.2s;
+            margin-top: 8px;
+        }
+
+        .btn:hover {
+            background-color: var(--fb-blue-dark);
+        }
+
+        .btn-success {
+            background-color: var(--fb-green);
+        }
+
+        .btn-success:hover {
+            background-color: var(--fb-green-dark);
+        }
+
+        /* Login Modal Specific Styles */
+        .login-modal-footer {
+            display: flex;
+            justify-content: center;
             margin-top: 20px;
+            gap: 15px;
+        }
+
+        .login-mode-toggle {
+            background: none;
+            border: none;
+            color: var(--fb-gray-4);
+            font-size: 12px;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 50%;
+            transition: color 0.2s;
+            width: 16px;
+            height: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-mode-toggle:hover {
+            color: var(--fb-blue);
+        }
+
+        .login-mode-toggle.active {
+            color: var(--fb-blue);
+        }
+
+        .login-mode-toggle.hidden {
+            display: none;
+        }
+
+        /* Back Button */
+        .back-btn {
+            background: var(--fb-gray-2);
+            border: none;
+            color: var(--fb-gray-6);
+            font-size: 14px;
+            cursor: pointer;
+            padding: 8px 16px;
+            border-radius: 6px;
+            transition: background-color 0.2s;
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .back-btn:hover {
+            background-color: var(--fb-gray-3);
+        }
+
+        .back-btn i {
+            margin-right: 6px;
+        }
+
+        /* Admin Panel Styles */
+        .admin-tabs {
+            display: flex;
+            border-bottom: 1px solid var(--fb-gray-3);
+            margin-bottom: 20px;
+        }
+
+        .admin-tab {
+            padding: 12px 20px;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-weight: 500;
+            color: var(--fb-gray-5);
+            transition: all 0.2s;
+        }
+
+        .admin-tab.active {
+            color: var(--fb-blue);
+            border-bottom-color: var(--fb-blue);
+        }
+
+        .admin-tab-content {
+            display: none;
+        }
+
+        .admin-tab-content.active {
+            display: block;
+        }
+
+        .user-list-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px;
+            border: 1px solid var(--fb-gray-2);
+            border-radius: 6px;
+            margin-bottom: 10px;
+        }
+
+        .user-info {
+            flex: 1;
+        }
+
+        .user-name {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .user-details {
+            font-size: 12px;
+            color: var(--fb-gray-4);
+        }
+
+        .user-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        /* Bulk Question Input */
+        .bulk-format {
+            background-color: var(--fb-gray-1);
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            font-size: 13px;
+        }
+
+        .bulk-format h4 {
+            margin-bottom: 8px;
+            color: var(--fb-text);
+        }
+
+        .bulk-format pre {
+            background-color: var(--fb-white);
+            padding: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+            margin-top: 8px;
+        }
+
+        /* Quiz Interface Styles */
+        .quiz-interface {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--fb-white);
+            z-index: 3000;
+            overflow-y: auto;
+        }
+
+        .quiz-header {
+            background-color: var(--fb-blue);
+            color: white;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 3001;
+            height: 60px;
+        }
+
+        .quiz-timer {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .question-timer {
+            font-size: 16px;
+            margin-left: 15px;
+            background: rgba(255,255,255,0.2);
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+
+        .quiz-controls {
+            display: flex;
+            gap: 10px;
+        }
+
+        .quiz-question-container {
+            padding: 20px;
+            max-width: 800px;
+            margin: 80px auto 20px;
+        }
+
+        .quiz-question {
+            font-size: 18px;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .quiz-option {
+            padding: 15px;
+            border: 1px solid var(--fb-gray-3);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .quiz-option:hover {
+            background-color: var(--fb-gray-1);
+        }
+
+        .quiz-option.selected {
+            background-color: var(--fb-blue);
+            color: white;
+            border-color: var(--fb-blue);
+        }
+
+        .quiz-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .quiz-submit {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: var(--fb-green);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .quiz-submit:hover {
+            background-color: var(--fb-green-dark);
+        }
+
+        /* Quiz Rules Page Styles */
+        .quiz-rules-page {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--fb-white);
+            z-index: 3000;
+            overflow-y: auto;
+        }
+
+        .rules-container {
+            padding: 20px;
+            max-width: 800px;
+            margin: 60px auto 20px;
+        }
+
+        .rules-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: linear-gradient(135deg, var(--fb-blue), var(--fb-blue-dark));
+            color: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .rules-header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .rules-header p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        .rules-content {
+            background-color: var(--fb-white);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            border: 2px solid var(--fb-gray-2);
+        }
+
+        .rules-content h2 {
+            color: var(--fb-blue);
+            margin-bottom: 15px;
+            font-size: 22px;
+            border-bottom: 2px solid var(--fb-gray-2);
+            padding-bottom: 10px;
+        }
+
+        .rules-list {
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        .rules-list li {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        .rules-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .rules-actions .btn {
+            flex: 1;
+            max-width: 200px;
+            padding: 15px;
+            font-size: 16px;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .rules-actions .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        .rules-actions .btn-success {
+            background-color: var(--fb-green);
+        }
+
+        .rules-actions .btn-success:hover {
+            background-color: var(--fb-green-dark);
+        }
+
+        /* Results Page Styles */
+        #resultsPage.quiz-interface {
+            padding-top: 0;
+        }
+
+        .results-container {
+            padding: 20px;
+            max-width: 800px;
+            margin: 60px auto 20px;
+        }
+
+        .results-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: linear-gradient(135deg, var(--fb-blue), var(--fb-blue-dark));
+            color: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .results-header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .results-header p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        .results-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background-color: var(--fb-white);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            text-align: center;
+            border: 2px solid var(--fb-gray-2);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+        }
+
+        .stat-value {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: var(--fb-blue);
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: var(--fb-gray-5);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .results-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        .results-actions .btn {
+            flex: 1;
+            max-width: 200px;
+            padding: 15px;
+            font-size: 15px;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .results-actions .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        /* Share Results Modal */
+        .share-results-content {
+            background-color: var(--fb-white);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .share-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: space-between;
+        }
+
+        /* Utility Classes */
+        .d-none {
+            display: none !important;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .mt-2 {
+            margin-top: 8px;
+        }
+
+        .mb-2 {
+            margin-bottom: 8px;
+        }
+
+        .p-3 {
+            padding: 16px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .main-container {
+                flex-direction: column;
+            }
+
+            .hamburger-menu {
+                display: block;
+            }
+
+            .dropdown-content {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .quiz-card {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .quiz-actions {
+                margin-top: 12px;
+                width: 100%;
+                justify-content: space-between;
+            }
+            
+            .quiz-btn {
+                flex: 1;
+                justify-content: center;
+            }
+
+            .tabs {
+                overflow-x: auto;
+                padding-bottom: 5px;
+            }
+
+            .tab {
+                padding: 12px 16px;
+                font-size: 14px;
+            }
+
+            .results-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .results-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .results-actions .btn {
+                max-width: 100%;
+            }
+
+            .rules-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .rules-actions .btn {
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .content-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .content-actions {
+                width: 100%;
+                justify-content: space-between;
+            }
+            
+            .results-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .quiz-header {
+                padding: 10px;
+            }
+
+            .quiz-timer, .question-timer {
+                font-size: 14px;
+            }
+
+            .main-container {
+                margin-top: 120px;
+                padding: 15px 10px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Login Screen -->
-        <div id="loginScreen">
-            <div class="header">
-                <div class="logo">Officer's Nexus</div>
-                <div class="tagline">@officersnexus</div>
+    <!-- Header -->
+    <div class="header-bar d-none" id="headerBar">
+        <a href="https://t.me/officersnexus" class="nexus-branding-box" target="_blank">
+            <div class="text-content">
+                <div class="header-text">OFFICER'S NEXUS</div>
+                <div class="subheader-text">@officersnexus</div>
             </div>
+        </a>
 
-            <div class="login-box">
-                <div class="form-group">
-                    <input type="text" class="form-input" id="username" placeholder="Username" required>
+        <div class="header-controls">
+            <button id="sortButton" class="d-none" onclick="openSortModal()">
+                <i class="fas fa-sort-amount-down"></i>
+            </button>
+            
+            <!-- Hamburger Menu -->
+            <div class="hamburger-menu d-none" id="hamburgerMenu">
+                <button class="hamburger-btn" id="hamburgerBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="mobile-dropdown" id="mobileDropdown">
+                    <!-- Menu items will be populated based on user role -->
                 </div>
-                <div class="form-group">
-                    <input type="password" class="form-input" id="passkey" placeholder="Passkey" required>
-                </div>
-                <button class="login-btn" onclick="login()">Log In</button>
-                <a href="#" class="forgot-link" onclick="showAdminAccess()">Forgotten passkey?</a>
-                <div class="divider"></div>
-                <button class="create-btn" onclick="createAccount()">Create new account</button>
             </div>
+        </div>
+        
+        <!-- Dropdown Menu for Desktop -->
+        <div class="dropdown-content" id="userDropdown">
+            <!-- Menu items will be populated based on user role -->
+        </div>
+    </div>
 
-            <!-- Hidden Admin Access -->
-            <div id="adminAccess" class="hidden">
-                <div class="login-box">
-                    <div class="form-group">
-                        <input type="password" class="form-input" id="adminPassword" placeholder="Admin Master Password">
+    <!-- Tabs Navigation -->
+    <div class="tabs-container d-none" id="tabsContainer">
+        <div class="tabs">
+            <button class="tab" data-tab="info" onclick="switchTab('info')">
+                <i class="fas fa-newspaper"></i> Information
+            </button>
+            <button class="tab active" data-tab="quiz" onclick="switchTab('quiz')">
+                <i class="fas fa-question-circle"></i> Quizzes
+            </button>
+            <button class="tab d-none" id="adminTab" data-tab="adminPanel" onclick="switchTab('adminPanel')">
+                <i class="fas fa-user-shield"></i> Admin Panel
+            </button>
+            <button class="tab d-none" id="makerPanelTab" data-tab="makerPanel" onclick="switchTab('makerPanel')">
+                <i class="fas fa-users"></i> My Students
+            </button>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-container d-none" id="mainContainer">
+        <!-- Main Content Area -->
+        <div class="main-content">
+            <!-- Information Section -->
+            <div class="content-section" id="infoSection">
+                <div class="content-card">
+                    <div class="content-header">
+                        <div class="content-title">Information & Notices</div>
+                        <div class="content-actions">
+                            <button class="action-btn" onclick="refreshInfo()">
+                                <i class="fas fa-sync-alt"></i>
+                            </button>
+                            <button class="action-btn primary d-none" id="createInfoBtn" onclick="openCreateInfoModal()">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
                     </div>
-                    <button class="login-btn" onclick="adminLogin()">Admin Login</button>
+                    
+                    <div id="infoContent">
+                        <!-- Info cards will be dynamically inserted here -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Quiz Section -->
+            <div class="content-section active" id="quizSection">
+                <div class="content-card">
+                    <div class="content-header">
+                        <div class="content-title">Available Quizzes</div>
+                        <div class="content-actions">
+                            <button class="action-btn" onclick="refreshQuizzes()">
+                                <i class="fas fa-sync-alt"></i>
+                            </button>
+                            <button class="action-btn primary d-none" id="createQuizBtn" onclick="openCreateQuizModal()">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div id="quizContent">
+                        <!-- Quiz cards will be dynamically inserted here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Admin Panel Section -->
+            <div class="content-section" id="adminPanelSection">
+                <div class="content-card">
+                    <button class="back-btn" onclick="switchTab('quiz')">
+                        <i class="fas fa-arrow-left"></i> Back to Quizzes
+                    </button>
+                    <div class="content-header">
+                        <div class="content-title">Admin Panel</div>
+                    </div>
+                    
+                    <div class="admin-tabs">
+                        <button class="admin-tab active" onclick="switchAdminTab('students')">Manage Students</button>
+                        <button class="admin-tab" onclick="switchAdminTab('makers')">Manage Makers</button>
+                    </div>
+                    
+                    <div class="admin-tab-content active" id="studentsTab">
+                        <h3>All Students</h3>
+                        <div id="studentsList">
+                            <!-- Students list will be populated here -->
+                        </div>
+                    </div>
+                    
+                    <div class="admin-tab-content" id="makersTab">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                            <h3 style="margin: 0;">All Makers</h3>
+                            <button class="action-btn primary" onclick="openAddMakerModal()">
+                                <i class="fas fa-plus"></i> Add Maker
+                            </button>
+                        </div>
+                        <div id="makersList">
+                            <!-- Makers list will be populated here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Maker Panel Section -->
+            <div class="content-section" id="makerPanelSection">
+                <div class="content-card">
+                    <button class="back-btn" onclick="switchTab('quiz')">
+                        <i class="fas fa-arrow-left"></i> Back to Quizzes
+                    </button>
+                    <div class="content-header">
+                        <div class="content-title">My Students</div>
+                    </div>
+                    
+                    <div id="myStudentsList">
+                        <!-- Maker's students list will be populated here -->
+                    </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- Student Dashboard -->
-        <div id="studentDashboard" class="dashboard hidden">
-            <div class="dashboard-header">
-                <h2>Student Dashboard</h2>
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal" style="display: block;">
+        <div class="modal-content">
+            <div class="login-branding">
+                <div class="login-logo">ON</div>
+                <div class="login-brand-text">
+                    <div class="login-header-text">OFFICER'S NEXUS</div>
+                    <div class="login-subheader-text">@officersnexus</div>
+                </div>
             </div>
-            <div class="dashboard-body">
-                <div class="user-info">
-                    <div class="username" id="studentUsername"></div>
-                    <div class="role-badge student-badge">Student</div>
+            <div class="modal-body">
+                <div class="input-group">
+                    <label class="input-label" for="loginName">Your Name</label>
+                    <input type="text" id="loginName" class="input-field" placeholder="Enter your name">
                 </div>
-                <div class="action-grid">
-                    <button class="action-btn" onclick="attemptQuiz()">📝 Attempt Quiz</button>
-                    <button class="action-btn" onclick="viewResults()">📊 View Results</button>
-                    <button class="action-btn" onclick="viewRankings()">🏆 View Rankings</button>
+                <div class="input-group">
+                    <label class="input-label" for="loginCode">Unique Code</label>
+                    <input type="password" id="loginCode" class="input-field" placeholder="Enter your unique code">
                 </div>
-                <button class="logout-btn" onclick="logout()">Log Out</button>
+                <button class="btn" onclick="handleLogin()">Login</button>
+                <div class="text-center mt-2">
+                    <a href="#" style="color: var(--fb-blue); font-size: 14px;" onclick="openForgotCodeModal()">Forgot your code?</a>
+                </div>
+                <div class="login-modal-footer">
+                    <button class="login-mode-toggle active" id="studentMode" onclick="switchLoginMode('student')">•</button>
+                    <button class="login-mode-toggle" id="makerMode" onclick="switchLoginMode('maker')">•</button>
+                    <button class="login-mode-toggle hidden" id="adminMode" onclick="switchLoginMode('admin')">•</button>
+                </div>
             </div>
         </div>
+    </div>
 
-        <!-- Maker Dashboard -->
-        <div id="makerDashboard" class="dashboard hidden">
-            <div class="dashboard-header">
-                <h2>Maker Dashboard</h2>
+    <!-- Forgot Code Modal -->
+    <div id="forgotCodeModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">Forgot Your Code?</div>
+                <span class="close" onclick="closeForgotCodeModal()">&times;</span>
             </div>
-            <div class="dashboard-body">
-                <div class="user-info">
-                    <div class="username" id="makerUsername"></div>
-                    <div class="role-badge maker-badge">Quiz Maker</div>
-                </div>
-                <div class="action-grid">
-                    <button class="action-btn" onclick="createQuiz()">➕ Create Quiz</button>
-                    <button class="action-btn" onclick="manageQuizzes()">📋 Manage Quizzes</button>
-                    <button class="action-btn" onclick="quizAnalytics()">📈 View Analytics</button>
-                    <button class="action-btn" onclick="generateLink()">🔗 Generate Share Link</button>
-                </div>
-                <button class="logout-btn" onclick="logout()">Log Out</button>
+            <div class="modal-body">
+                <p style="text-align: center; margin-bottom: 20px;">
+                    Please contact your code provider to retrieve your unique code.
+                </p>
+                <button class="btn" onclick="closeForgotCodeModal()">OK</button>
             </div>
         </div>
+    </div>
 
-        <!-- Admin Dashboard -->
-        <div id="adminDashboard" class="dashboard hidden">
-            <div class="dashboard-header">
-                <h2>Admin Control Panel</h2>
+    <!-- Create Quiz Modal -->
+    <div id="createQuizModal" class="modal">
+        <div class="modal-content" style="max-width: 800px;">
+            <div class="modal-header">
+                <div class="modal-title">Create New Quiz</div>
+                <span class="close" onclick="closeModal('createQuizModal')">&times;</span>
             </div>
-            <div class="dashboard-body">
-                <div class="user-info">
-                    <div class="username">System Administrator</div>
-                    <div class="role-badge admin-badge">Admin</div>
+            <div class="modal-body">
+                <div class="input-group">
+                    <label class="input-label" for="quizTitle">Quiz Title</label>
+                    <input type="text" id="quizTitle" class="input-field" placeholder="Enter quiz title">
                 </div>
-                <div class="action-grid">
-                    <button class="action-btn" onclick="manageUsers()">👥 Manage All Users</button>
-                    <button class="action-btn" onclick="viewPasswords()">🔑 View All Passwords</button>
-                    <button class="action-btn" onclick="resetPasswords()">🔄 Reset Passwords</button>
-                    <button class="action-btn" onclick="systemAnalytics()">📊 System Analytics</button>
+                <div class="input-group">
+                    <label class="input-label" for="quizDuration">Duration (minutes)</label>
+                    <input type="number" id="quizDuration" class="input-field" placeholder="Enter duration in minutes" value="30">
                 </div>
-                <button class="logout-btn" onclick="logout()">Log Out</button>
+                <div class="input-group">
+                    <label class="input-label" for="correctMarks">Marks per Correct Answer</label>
+                    <input type="number" id="correctMarks" class="input-field" placeholder="Enter marks for correct answer" value="1" step="0.1">
+                </div>
+                <div class="input-group">
+                    <label class="input-label" for="negativeMarks">Negative Marking</label>
+                    <input type="number" id="negativeMarks" class="input-field" placeholder="Enter negative marks" value="0.25" step="0.01" min="0" max="1">
+                </div>
+                <div class="input-group" style="display: flex; align-items: center;">
+                    <input type="checkbox" id="perQuestionTimer" style="margin-right: 10px;">
+                    <label class="input-label" for="perQuestionTimer" style="margin-bottom: 0;">Enable Per Question Timer</label>
+                </div>
+                <div class="input-group d-none" id="questionTimerGroup">
+                    <label class="input-label" for="questionTimer">Per Question Timer (seconds)</label>
+                    <input type="number" id="questionTimer" class="input-field" placeholder="Enter timer per question" value="60">
+                </div>
+                
+                <h3 style="margin: 20px 0 10px; color: var(--fb-text);">Add Questions (Bilingual Format)</h3>
+                
+                <div class="bulk-format">
+                    <h4>Format Instructions (Bilingual):</h4>
+                    <p>Enter each question in the following format for bilingual support:</p>
+                    <pre>Q. [English Question] / [Hindi Question]
+A. [English Option 1] / [Hindi Option 1]
+B. [English Option 2] / [Hindi Option 2]
+C. [English Option 3] / [Hindi Option 3]
+D. [English Option 4] / [Hindi Option 4]
+ANS: A/B/C/D
+EXP: [English Explanation] / [Hindi Explanation]</pre>
+                    <p>Separate questions with a blank line.</p>
+                    <p><strong>Example:</strong></p>
+                    <pre>Q. What is the capital of France? / फ्रांस की राजधानी क्या है?
+A. London / लंदन
+B. Berlin / बर्लिन
+C. Paris / पेरिस
+D. Madrid / मैड्रिड
+ANS: C
+EXP: Paris is the capital of France / पेरिस फ्रांस की राजधानी है</pre>
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label">Questions (Bilingual Input)</label>
+                    <textarea id="bulkQuestions" class="input-field" placeholder="Paste your questions here using the bilingual format above..." rows="10"></textarea>
+                </div>
+                
+                <div style="display: flex; gap: 10px; margin-top: 20px;">
+                    <button class="btn" style="flex: 1;" onclick="previewQuiz()">Preview Quiz</button>
+                    <button class="btn btn-success" style="flex: 1;" onclick="createQuiz()">Create Quiz</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Create Info Modal -->
+    <div id="createInfoModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">Create Information Post</div>
+                <span class="close" onclick="closeModal('createInfoModal')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="input-group">
+                    <label class="input-label" for="infoTitle">Title</label>
+                    <input type="text" id="infoTitle" class="input-field" placeholder="Enter post title">
+                </div>
+                <div class="input-group">
+                    <label class="input-label" for="infoContent">Content</label>
+                    <textarea id="infoContent" class="input-field" placeholder="Enter post content" rows="6"></textarea>
+                </div>
+                <div class="input-group" id="infoVisibilityGroup">
+                    <label class="input-label">Visibility</label>
+                    <div style="display: flex; gap: 10px;">
+                        <label style="display: flex; align-items: center;">
+                            <input type="checkbox" id="showToStudents" checked style="margin-right: 5px;">
+                            Show to Students
+                        </label>
+                        <label style="display: flex; align-items: center;">
+                            <input type="checkbox" id="showToMakers" style="margin-right: 5px;">
+                            Show to Makers
+                        </label>
+                    </div>
+                </div>
+                <button class="btn" onclick="createInfoPost()">Publish Post</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Manage Quiz Modal -->
+    <div id="manageQuizModal" class="modal">
+        <div class="modal-content" style="max-width: 500px;">
+            <div class="modal-header">
+                <div class="modal-title">Manage Quiz</div>
+                <span class="close" onclick="closeModal('manageQuizModal')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="input-group" style="display: flex; align-items: center; justify-content: space-between;">
+                    <label class="input-label" style="margin-bottom: 0;">Enable Quiz</label>
+                    <input type="checkbox" id="enableQuiz">
+                </div>
+                <div class="input-group" style="display: flex; align-items: center; justify-content: space-between;">
+                    <label class="input-label" style="margin-bottom: 0;">Enable Leaderboard</label>
+                    <input type="checkbox" id="enableLeaderboard">
+                </div>
+                <div style="display: flex; gap: 10px; margin-top: 20px;">
+                    <button class="btn" style="flex: 1;" onclick="editQuiz()">
+                        <i class="fas fa-edit"></i> Edit
+                    </button>
+                    <button class="btn" style="flex: 1;" onclick="shareQuiz()">
+                        <i class="fas fa-share"></i> Share
+                    </button>
+                    <button class="btn" style="flex: 1; background-color: var(--fb-red);" onclick="deleteQuiz()">
+                        <i class="fas fa-trash"></i> Delete
+                    </button>
+                </div>
+                <button class="btn btn-success" style="margin-top: 15px;" onclick="saveQuizSettings()">
+                    <i class="fas fa-save"></i> Save Settings
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sort Modal -->
+    <div id="sortModal" class="modal">
+        <div class="modal-content" style="max-width: 400px;">
+            <div class="modal-header">
+                <div class="modal-title">Sort Quizzes</div>
+                <span class="close" onclick="closeModal('sortModal')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="input-group">
+                    <label class="input-label">Sort By</label>
+                    <select id="sortCriteria" class="input-field">
+                        <option value="title">Title (A-Z)</option>
+                        <option value="duration">Duration (Low to High)</option>
+                        <option value="questions">Number of Questions</option>
+                        <option value="date">Creation Date (Newest First)</option>
+                    </select>
+                </div>
+                <button class="btn" onclick="applySort()">Apply Sort</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Maker Modal -->
+    <div id="addMakerModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">Add New Maker</div>
+                <span class="close" onclick="closeModal('addMakerModal')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="input-group">
+                    <label class="input-label" for="makerName">Maker Name</label>
+                    <input type="text" id="makerName" class="input-field" placeholder="Enter maker name">
+                </div>
+                <div class="input-group">
+                    <label class="input-label" for="makerCode">Unique Code</label>
+                    <input type="text" id="makerCode" class="input-field" placeholder="Enter unique code">
+                </div>
+                <button class="btn" onclick="addMaker()">Add Maker</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Change Credentials Modal -->
+    <div id="changeCredentialsModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">Change Login Credentials</div>
+                <span class="close" onclick="closeModal('changeCredentialsModal')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="input-group">
+                    <label class="input-label" for="currentCode">Current Code</label>
+                    <input type="password" id="currentCode" class="input-field" placeholder="Enter current code" value="">
+                </div>
+                <div class="input-group">
+                    <label class="input-label" for="newName">New Name</label>
+                    <input type="text" id="newName" class="input-field" placeholder="Enter new name" value="">
+                </div>
+                <div class="input-group">
+                    <label class="input-label" for="newCode">New Code</label>
+                    <input type="password" id="newCode" class="input-field" placeholder="Enter new code">
+                </div>
+                <button class="btn" onclick="changeCredentials()">Update Credentials</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Set Student Code Modal -->
+    <div id="setStudentCodeModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">Set Student Code</div>
+                <span class="close" onclick="closeModal('setStudentCodeModal')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="input-group">
+                    <label class="input-label" for="studentCode">Student Code</label>
+                    <input type="text" id="studentCode" class="input-field" placeholder="Enter code for students">
+                </div>
+                <button class="btn" onclick="setStudentCode()">Set Code</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Telegram Link Modal -->
+    <div id="telegramLinkModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">Set Telegram Group Link</div>
+                <span class="close" onclick="closeModal('telegramLinkModal')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="input-group">
+                    <label class="input-label" for="telegramLink">Telegram Group Link</label>
+                    <input type="text" id="telegramLink" class="input-field" placeholder="Enter your Telegram group link">
+                </div>
+                <button class="btn" onclick="setTelegramLink()">Save Link</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quiz Preview Modal -->
+    <div id="quizPreviewModal" class="modal">
+        <div class="modal-content" style="max-width: 800px; max-height: 80vh; overflow-y: auto;">
+            <div class="modal-header">
+                <div class="modal-title">Quiz Preview</div>
+                <span class="close" onclick="closeModal('quizPreviewModal')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div id="quizPreviewContent">
+                    <!-- Preview content will be inserted here -->
+                </div>
+                <button class="btn" onclick="closeModal('quizPreviewModal')" style="margin-top: 20px;">Close Preview</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quiz Rules Page -->
+    <div id="quizRulesPage" class="quiz-rules-page">
+        <div class="header-bar">
+            <a href="https://t.me/officersnexus" class="nexus-branding-box" target="_blank">
+                <div class="text-content">
+                    <div class="header-text">OFFICER'S NEXUS</div>
+                    <div class="subheader-text">@officersnexus</div>
+                </div>
+            </a>
+        </div>
+        <div class="rules-container">
+            <div class="rules-header">
+                <h1>Quiz Instructions</h1>
+                <p>Please read the rules carefully before starting the quiz</p>
+            </div>
+            <div class="rules-content">
+                <h2>Important Rules & Guidelines</h2>
+                <ul class="rules-list">
+                    <li><strong>Total Duration:</strong> <span id="rulesDuration">30</span> minutes</li>
+                    <li><strong>Marks per correct answer:</strong> <span id="rulesCorrectMarks">1</span></li>
+                    <li><strong>Negative marking:</strong> <span id="rulesNegativeMarks">0.25</span> for each wrong answer</li>
+                    <li>This quiz is AI-generated, so mistakes are possible. Please report any issues.</li>
+                    <li>Once started, the quiz cannot be paused or restarted.</li>
+                    <li>Do not refresh the page or navigate away during the quiz.</li>
+                    <li>All questions are bilingual (English/Hindi) - you can toggle between languages.</li>
+                    <li>Use the "Jump" button to navigate between questions.</li>
+                    <li>You can clear your answer using the "Clear Answer" button.</li>
+                    <li>Submit your quiz only when you're sure you've answered all questions.</li>
+                </ul>
+                
+                <h2>Technical Requirements</h2>
+                <ul class="rules-list">
+                    <li>Stable internet connection is required</li>
+                    <li>Use a modern browser (Chrome, Firefox, Safari, Edge)</li>
+                    <li>Enable JavaScript for full functionality</li>
+                    <li>Do not use browser back/forward buttons during quiz</li>
+                </ul>
+                
+                <div style="display: flex; align-items: center; margin: 20px 0; padding: 15px; background-color: var(--fb-gray-1); border-radius: 8px;">
+                    <input type="checkbox" id="agreeRules" style="margin-right: 10px; transform: scale(1.2);">
+                    <label for="agreeRules" style="font-weight: 600; font-size: 16px;">I agree to the rules and understand that this quiz is AI-generated</label>
+                </div>
+            </div>
+            <div class="rules-actions">
+                <button class="btn" onclick="goBackToQuizzes()">
+                    <i class="fas fa-arrow-left"></i> Back to Quizzes
+                </button>
+                <button class="btn btn-success" id="startQuizBtn" onclick="startQuizFromRules()" disabled>
+                    <i class="fas fa-play"></i> Start Quiz
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quiz Interface -->
+    <div id="quizInterface" class="quiz-interface">
+        <div class="header-bar">
+            <a href="https://t.me/officersnexus" class="nexus-branding-box" target="_blank">
+                <div class="text-content">
+                    <div class="header-text">OFFICER'S NEXUS</div>
+                    <div class="subheader-text">@officersnexus</div>
+                </div>
+            </a>
+            <div class="quiz-controls">
+                <div class="quiz-timer" id="quizTimer">30:00</div>
+                <div class="question-timer d-none" id="questionTimerDisplay">60s</div>
+                <button class="action-btn" style="color: white; background: rgba(255,255,255,0.2);" onclick="toggleLanguage()">
+                    <i class="fas fa-language"></i> <span id="languageText">English</span>
+                </button>
+                <button class="action-btn" style="color: white; background: rgba(255,255,255,0.2);" onclick="showQuestionJump()">
+                    <i class="fas fa-ellipsis-v"></i> Jump
+                </button>
+            </div>
+        </div>
+        <div class="quiz-question-container">
+            <div class="quiz-question" id="currentQuestion">Question will appear here</div>
+            <div class="quiz-options" id="quizOptions">
+                <!-- Options will be inserted here -->
+            </div>
+            <div class="quiz-navigation">
+                <button class="action-btn" onclick="previousQuestion()">
+                    <i class="fas fa-arrow-left"></i> Previous
+                </button>
+                <button class="action-btn" onclick="clearAnswer()">
+                    <i class="fas fa-times"></i> Clear Answer
+                </button>
+                <button class="action-btn" onclick="nextQuestion()">
+                    Next <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+            <button class="quiz-submit" onclick="submitQuiz()">Submit Quiz</button>
+        </div>
+    </div>
+
+    <!-- Results Page -->
+    <div id="resultsPage" class="quiz-interface">
+        <div class="header-bar">
+            <a href="https://t.me/officersnexus" class="nexus-branding-box" target="_blank">
+                <div class="text-content">
+                    <div class="header-text">OFFICER'S NEXUS</div>
+                    <div class="subheader-text">@officersnexus</div>
+                </div>
+            </a>
+        </div>
+        <div class="results-container">
+            <div class="results-header">
+                <h1>Quiz Results</h1>
+                <p>Detailed analysis of your performance</p>
+            </div>
+            <div class="results-stats">
+                <div class="stat-card">
+                    <div class="stat-value" id="statAttempted">0</div>
+                    <div class="stat-label">Questions Attempted</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="statCorrect">0</div>
+                    <div class="stat-label">Correct Answers</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="statIncorrect">0</div>
+                    <div class="stat-label">Incorrect Answers</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="statScore">0</div>
+                    <div class="stat-label">Total Score</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="statTime">0:00</div>
+                    <div class="stat-label">Time Taken</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="statAvgTime">0s</div>
+                    <div class="stat-label">Avg Time/Question</div>
+                </div>
+            </div>
+            <div class="results-actions">
+                <button class="btn" onclick="goToDashboard()">
+                    <i class="fas fa-tachometer-alt"></i> Dashboard
+                </button>
+                <button class="btn" onclick="openShareResultsModal()">
+                    <i class="fas fa-share"></i> Share Results
+                </button>
+                <button class="btn" onclick="showAnswerKey()">
+                    <i class="fas fa-key"></i> Answer Key
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Share Results Modal -->
+    <div id="shareResultsModal" class="modal">
+        <div class="modal-content" style="max-width: 600px;">
+            <div class="modal-header">
+                <div class="modal-title">Share Results</div>
+                <span class="close" onclick="closeModal('shareResultsModal')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="share-results-content" id="shareResultsContent">
+                    <!-- Results content will be inserted here -->
+                </div>
+                <div class="share-actions">
+                    <button class="btn" onclick="copyResults()">
+                        <i class="fas fa-copy"></i> Copy Results
+                    </button>
+                    <button class="btn btn-success" onclick="shareToTelegram()">
+                        <i class="fab fa-telegram"></i> Share to Telegram
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Answer Key Modal -->
+    <div id="answerKeyModal" class="modal">
+        <div class="modal-content" style="max-width: 800px; max-height: 80vh; overflow-y: auto;">
+            <div class="modal-header">
+                <div class="modal-title">Answer Key</div>
+                <div>
+                    <button class="action-btn" onclick="toggleAnswerKeyLanguage()">
+                        <i class="fas fa-language"></i> <span id="answerKeyLanguage">English</span>
+                    </button>
+                    <span class="close" onclick="closeModal('answerKeyModal')">&times;</span>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div id="answerKeyContent">
+                    <!-- Answer key will be inserted here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Leaderboard Modal -->
+    <div id="leaderboardModal" class="modal">
+        <div class="modal-content" style="max-width: 600px;">
+            <div class="modal-header">
+                <div class="modal-title">Quiz Leaderboard</div>
+                <span class="close" onclick="closeModal('leaderboardModal')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div id="leaderboardContent">
+                    <p>Leaderboard data will be displayed here when available.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Quiz Modal -->
+    <div id="editQuizModal" class="modal">
+        <div class="modal-content" style="max-width: 800px;">
+            <div class="modal-header">
+                <div class="modal-title">Edit Quiz</div>
+                <span class="close" onclick="closeModal('editQuizModal')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="input-group">
+                    <label class="input-label" for="editQuizTitle">Quiz Title</label>
+                    <input type="text" id="editQuizTitle" class="input-field" placeholder="Enter quiz title">
+                </div>
+                <div class="input-group">
+                    <label class="input-label" for="editQuizDuration">Duration (minutes)</label>
+                    <input type="number" id="editQuizDuration" class="input-field" placeholder="Enter duration in minutes">
+                </div>
+                <div class="input-group">
+                    <label class="input-label" for="editCorrectMarks">Marks per Correct Answer</label>
+                    <input type="number" id="editCorrectMarks" class="input-field" placeholder="Enter marks for correct answer" step="0.1">
+                </div>
+                <div class="input-group">
+                    <label class="input-label" for="editNegativeMarks">Negative Marking</label>
+                    <input type="number" id="editNegativeMarks" class="input-field" placeholder="Enter negative marks" step="0.01" min="0" max="1">
+                </div>
+                
+                <!-- Add per question timer option in edit modal -->
+                <div class="input-group" style="display: flex; align-items: center;">
+                    <input type="checkbox" id="editPerQuestionTimer" style="margin-right: 10px;">
+                    <label class="input-label" for="editPerQuestionTimer" style="margin-bottom: 0;">Enable Per Question Timer</label>
+                </div>
+                <div class="input-group d-none" id="editQuestionTimerGroup">
+                    <label class="input-label" for="editQuestionTimer">Per Question Timer (seconds)</label>
+                    <input type="number" id="editQuestionTimer" class="input-field" placeholder="Enter timer per question" value="60">
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label">Questions</label>
+                    <div id="editQuestionsList">
+                        <!-- Questions will be listed here for editing -->
+                    </div>
+                </div>
+                <button class="btn" onclick="saveQuizEdit()">Save Changes</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Question Jump Modal -->
+    <div id="questionJumpModal" class="modal">
+        <div class="modal-content" style="max-width: 500px;">
+            <div class="modal-header">
+                <div class="modal-title">Jump to Question</div>
+                <span class="close" onclick="closeModal('questionJumpModal')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-bottom: 20px;" id="questionGrid">
+                    <!-- Question numbers will be inserted here -->
+                </div>
+                <button class="btn" style="background-color: var(--fb-red);" onclick="quitQuiz()">
+                    <i class="fas fa-sign-out-alt"></i> Quit Quiz
+                </button>
             </div>
         </div>
     </div>
 
     <script>
-        // Database Simulation
-        let users = JSON.parse(localStorage.getItem('officersnexus_users')) || {};
-        let quizzes = JSON.parse(localStorage.getItem('officersnexus_quizzes')) || {};
-        
-        // Default Admin (First time setup)
-        if (!users.admin) {
-            users.admin = {
-                password: 'admin2024',
-                role: 'admin',
-                createdAt: new Date().toISOString()
-            };
-            localStorage.setItem('officersnexus_users', JSON.stringify(users));
+        // Application State
+        const appState = {
+            currentUser: null,
+            currentTab: 'quiz',
+            loginMode: 'student',
+            adminTab: 'students',
+            clickCount: 0,
+            makers: [],
+            students: [],
+            quizzes: [
+                {
+                    id: 1,
+                    title: "Sample Quiz 1",
+                    duration: 30,
+                    correctMarks: 1,
+                    negativeMarks: 0.25,
+                    perQuestionTimer: false,
+                    questionTimer: 0,
+                    questions: [
+                        {
+                            id: 1,
+                            text: "What is the capital of France? / फ्रांस की राजधानी क्या है?",
+                            options: [
+                                "London / लंदन",
+                                "Berlin / बर्लिन", 
+                                "Paris / पेरिस",
+                                "Madrid / मैड्रिड"
+                            ],
+                            correctAnswer: 2,
+                            explanation: "Paris is the capital of France / पेरिस फ्रांस की राजधानी है"
+                        },
+                        {
+                            id: 2,
+                            text: "What is 15 × 3? / 15 × 3 क्या है?",
+                            options: [
+                                "35 / ३५",
+                                "40 / ४०", 
+                                "45 / ४५",
+                                "50 / ५०"
+                            ],
+                            correctAnswer: 2,
+                            explanation: "15 multiplied by 3 equals 45 / 15 को 3 से गुणा करने पर 45 आता है"
+                        }
+                    ],
+                    enabled: true,
+                    leaderboardEnabled: true,
+                    createdBy: 1,
+                    createdByName: "Sample Maker"
+                }
+            ],
+            infoPosts: [
+                {
+                    id: 1,
+                    title: "Welcome to Officer's Nexus",
+                    content: "Welcome to our new learning platform! Here you can access quizzes, study materials, and important announcements.",
+                    author: "Admin",
+                    showToStudents: true,
+                    showToMakers: true,
+                    enabled: true,
+                    timestamp: "2 days ago",
+                    likes: 15,
+                    dislikes: 2
+                }
+            ],
+            currentQuiz: null,
+            quizAttempt: {
+                currentQuestion: 0,
+                answers: [],
+                startTime: null,
+                endTime: null,
+                timerInterval: null,
+                questionTimerInterval: null,
+                timeLeft: 0,
+                questionTimeLeft: 0,
+                currentLanguage: 'english'
+            },
+            makerTelegramLink: "",
+            answerKeyLanguage: 'english'
+        };
+
+        // DOM Elements
+        const loginButton = document.getElementById('loginButton');
+        const headerBar = document.getElementById('headerBar');
+        const mainContainer = document.getElementById('mainContainer');
+        const hamburgerMenu = document.getElementById('hamburgerMenu');
+        const hamburgerBtn = document.getElementById('hamburgerBtn');
+        const mobileDropdown = document.getElementById('mobileDropdown');
+        const tabsContainer = document.getElementById('tabsContainer');
+        const tabs = document.querySelectorAll('.tab');
+        const contentSections = document.querySelectorAll('.content-section');
+        const infoContent = document.getElementById('infoContent');
+        const quizContent = document.getElementById('quizContent');
+        const sortButton = document.getElementById('sortButton');
+        const createQuizBtn = document.getElementById('createQuizBtn');
+        const createInfoBtn = document.getElementById('createInfoBtn');
+        const questionTimerGroup = document.getElementById('questionTimerGroup');
+        const perQuestionTimer = document.getElementById('perQuestionTimer');
+        const studentMode = document.getElementById('studentMode');
+        const makerMode = document.getElementById('makerMode');
+        const adminMode = document.getElementById('adminMode');
+        const adminTab = document.getElementById('adminTab');
+        const makerPanelTab = document.getElementById('makerPanelTab');
+
+        // Initialize the application
+        function initApp() {
+            // Set up event listeners
+            hamburgerBtn.addEventListener('click', toggleMobileDropdown);
+            perQuestionTimer.addEventListener('change', toggleQuestionTimer);
+            
+            // Close dropdowns when clicking outside
+            document.addEventListener('click', function(event) {
+                if (!hamburgerBtn.contains(event.target) && !mobileDropdown.contains(event.target)) {
+                    mobileDropdown.classList.remove('show');
+                }
+                
+                // Close user dropdown if clicking outside
+                const userDropdown = document.getElementById('userDropdown');
+                if (!event.target.closest('.header-controls') && userDropdown.classList.contains('show')) {
+                    userDropdown.classList.remove('show');
+                }
+            });
+            
+            // Setup maker mode click counter for admin access
+            setupAdminAccess();
+            
+            // Handle escape key to close modals
+            document.addEventListener('keydown', function(event) {
+                if (event.key === 'Escape') {
+                    document.querySelectorAll('.modal').forEach(modal => {
+                        if (modal.style.display === 'block') {
+                            modal.style.display = 'none';
+                            document.body.style.overflow = 'auto';
+                        }
+                    });
+                }
+            });
+            
+            // Show login modal by default
+            if (!appState.currentUser) {
+                openModal('loginModal');
+            }
         }
 
-        function login() {
-            const username = document.getElementById('username').value.trim();
-            const passkey = document.getElementById('passkey').value;
+        // Setup admin access via maker mode clicks
+        function setupAdminAccess() {
+            makerMode.addEventListener('click', function() {
+                appState.clickCount++;
+                if (appState.clickCount >= 10) {
+                    adminMode.classList.remove('hidden');
+                    alert('Admin mode unlocked!');
+                    appState.clickCount = 0;
+                }
+            });
+        }
 
-            if (!username || !passkey) {
-                showError('Please enter both username and passkey');
+        // Toggle mobile dropdown
+        function toggleMobileDropdown() {
+            mobileDropdown.classList.toggle('show');
+        }
+
+        // Toggle user dropdown
+        function toggleUserDropdown() {
+            const dropdown = document.getElementById('userDropdown');
+            dropdown.classList.toggle('show');
+        }
+
+        // Toggle question timer field
+        function toggleQuestionTimer() {
+            if (perQuestionTimer.checked) {
+                questionTimerGroup.classList.remove('d-none');
+            } else {
+                questionTimerGroup.classList.add('d-none');
+            }
+        }
+
+        // Switch between tabs
+        function switchTab(tabName) {
+            // Update active tab
+            tabs.forEach(tab => {
+                if (tab.dataset.tab === tabName) {
+                    tab.classList.add('active');
+                } else {
+                    tab.classList.remove('active');
+                }
+            });
+            
+            // Show/hide sections
+            contentSections.forEach(section => {
+                if (section.id === tabName + 'Section') {
+                    section.classList.add('active');
+                } else {
+                    section.classList.remove('active');
+                }
+            });
+            
+            appState.currentTab = tabName;
+            
+            // Close mobile dropdown if open
+            mobileDropdown.classList.remove('show');
+        }
+
+        // Switch admin tabs
+        function switchAdminTab(tabName) {
+            appState.adminTab = tabName;
+            
+            // Update active admin tab
+            document.querySelectorAll('.admin-tab').forEach(tab => {
+                if (tab.textContent.includes(tabName.charAt(0).toUpperCase() + tabName.slice(1))) {
+                    tab.classList.add('active');
+                } else {
+                    tab.classList.remove('active');
+                }
+            });
+            
+            // Show/hide admin tab content
+            document.querySelectorAll('.admin-tab-content').forEach(content => {
+                if (content.id === tabName + 'Tab') {
+                    content.classList.add('active');
+                } else {
+                    content.classList.remove('active');
+                }
+            });
+            
+            renderAdminPanel();
+        }
+
+        // Modal functions - FIXED: Proper modal management
+        function openModal(modalId) {
+            // Close any other open modals first
+            document.querySelectorAll('.modal').forEach(modal => {
+                if (modal.style.display === 'block') {
+                    modal.style.display = 'none';
+                }
+            });
+            
+            document.getElementById(modalId).style.display = 'block';
+            
+            // Prevent body scrolling when modal is open
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+            
+            // Restore body scrolling when no modals are open
+            const anyModalOpen = Array.from(document.querySelectorAll('.modal'))
+                .some(modal => modal.style.display === 'block');
+            
+            if (!anyModalOpen) {
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        // Special function for forgot code modal
+        function closeForgotCodeModal() {
+            closeModal('forgotCodeModal');
+            openModal('loginModal');
+        }
+
+        // Switch login mode
+        function switchLoginMode(mode) {
+            appState.loginMode = mode;
+            const modalTitle = document.querySelector('#loginModal .modal-title');
+            
+            // Reset all mode buttons
+            studentMode.classList.remove('active');
+            makerMode.classList.remove('active');
+            adminMode.classList.remove('active');
+            
+            if (mode === 'student') {
+                modalTitle.textContent = 'Student Login';
+                studentMode.classList.add('active');
+            } else if (mode === 'maker') {
+                modalTitle.textContent = 'Maker Login';
+                makerMode.classList.add('active');
+            } else if (mode === 'admin') {
+                modalTitle.textContent = 'Admin Login';
+                adminMode.classList.add('active');
+            }
+        }
+
+        // Login handling
+        function handleLogin() {
+            const name = document.getElementById('loginName').value.trim();
+            const code = document.getElementById('loginCode').value.trim();
+            
+            if (!name || !code) {
+                alert('Please enter both name and unique code');
                 return;
             }
-
-            // Check if user exists
-            if (users[username]) {
-                if (users[username].password === passkey) {
-                    successfulLogin(username, users[username].role);
+            
+            // Validate login based on mode
+            let user = null;
+            
+            if (appState.loginMode === 'student') {
+                // Check if student exists and is not banned
+                user = appState.students.find(s => s.name === name && s.code === code && s.status !== 'banned');
+                if (!user) {
+                    // Check if code belongs to any maker
+                    const maker = appState.makers.find(m => m.code === code && m.status !== 'banned');
+                    if (maker) {
+                        // Check if name already exists
+                        const existingStudent = appState.students.find(s => s.name === name);
+                        if (existingStudent) {
+                            alert('This name is already taken. Please choose a different name.');
+                            return;
+                        }
+                        
+                        // Create new student
+                        user = {
+                            id: appState.students.length + 1,
+                            name: name,
+                            code: code,
+                            role: 'student',
+                            avatar: name.charAt(0).toUpperCase(),
+                            firstLogin: true,
+                            maker: maker.name,
+                            makerId: maker.id,
+                            status: 'active'
+                        };
+                        appState.students.push(user);
+                        alert('Welcome! Please change your login credentials for security.');
+                    } else {
+                        alert('Invalid code. Please check with your maker.');
+                        return;
+                    }
+                }
+            } else if (appState.loginMode === 'maker') {
+                // Check if maker exists and is not banned
+                user = appState.makers.find(m => m.name === name && m.code === code && m.status !== 'banned');
+                if (!user) {
+                    alert('Invalid maker credentials. Please check your name and code.');
+                    return;
+                }
+                user.role = 'maker';
+                user.avatar = name.charAt(0).toUpperCase();
+            } else if (appState.loginMode === 'admin') {
+                // Hardcoded admin credentials
+                if (name === 'admin' && code === 'admin123') {
+                    user = {
+                        id: 0,
+                        name: 'Admin',
+                        code: 'admin123',
+                        role: 'admin',
+                        avatar: 'A'
+                    };
+                } else {
+                    alert('Invalid admin credentials.');
                     return;
                 }
             }
-
-            // If not registered, auto-create as student with group passkey
-            if (passkey === 'student2024') { // Default group passkey
-                users[username] = {
-                    password: passkey,
-                    role: 'student',
-                    createdAt: new Date().toISOString()
-                };
-                localStorage.setItem('officersnexus_users', JSON.stringify(users));
-                successfulLogin(username, 'student');
-                return;
-            }
-
-            showError('Invalid username or passkey');
-        }
-
-        function successfulLogin(username, role) {
-            // Hide login screen
-            document.getElementById('loginScreen').classList.add('hidden');
             
-            // Show appropriate dashboard
-            const dashboardId = role + 'Dashboard';
-            document.getElementById(dashboardId).classList.remove('hidden');
+            if (user) {
+                appState.currentUser = user;
+                
+                // Update UI
+                updateUIForUser();
+                
+                // Close modal
+                closeModal('loginModal');
+                
+                // Show change credentials modal for first-time student login
+                if (user.firstLogin) {
+                    openChangeCredentialsModal();
+                }
+            }
+        }
+
+        // Update UI after login
+        function updateUIForUser() {
+            if (appState.currentUser) {
+                // Show UI elements
+                headerBar.classList.remove('d-none');
+                mainContainer.classList.remove('d-none');
+                tabsContainer.classList.remove('d-none');
+                hamburgerMenu.classList.remove('d-none');
+                sortButton.classList.remove('d-none');
+                
+                // Show/hide admin tab based on role
+                if (appState.currentUser.role === 'admin') {
+                    adminTab.classList.remove('d-none');
+                } else {
+                    adminTab.classList.add('d-none');
+                }
+                
+                // Show/hide maker panel tab based on role
+                if (appState.currentUser.role === 'maker') {
+                    makerPanelTab.classList.remove('d-none');
+                } else {
+                    makerPanelTab.classList.add('d-none');
+                }
+                
+                // Update hamburger menu based on role
+                updateHamburgerMenu();
+                
+                // Show/hide create buttons based on role
+                if (appState.currentUser.role === 'maker') {
+                    createQuizBtn.classList.remove('d-none');
+                    createInfoBtn.classList.remove('d-none');
+                } else {
+                    createQuizBtn.classList.add('d-none');
+                }
+                
+                if (appState.currentUser.role === 'admin' || appState.currentUser.role === 'maker') {
+                    createInfoBtn.classList.remove('d-none');
+                } else {
+                    createInfoBtn.classList.add('d-none');
+                }
+                
+                // Load data
+                renderInfoPosts();
+                renderQuizzes();
+                renderAdminPanel();
+                renderMakerPanel();
+                
+                // Set default tab to quiz
+                switchTab('quiz');
+            }
+        }
+
+        // Update hamburger menu based on user role
+        function updateHamburgerMenu() {
+            const dropdownContent = document.getElementById('userDropdown');
+            const mobileDropdownContent = document.getElementById('mobileDropdown');
             
-            // Set username display
-            if (role !== 'admin') {
-                document.getElementById(role + 'Username').textContent = username;
+            // Clear existing menu items
+            dropdownContent.innerHTML = '';
+            mobileDropdownContent.innerHTML = '';
+            
+            // Add user info at top
+            const userInfoItem = document.createElement('div');
+            userInfoItem.className = 'dropdown-item';
+            userInfoItem.style.fontWeight = '600';
+            userInfoItem.style.cursor = 'default';
+            userInfoItem.innerHTML = `<i class="fas fa-user"></i> ${appState.currentUser.name}`;
+            dropdownContent.appendChild(userInfoItem.cloneNode(true));
+            
+            // Add separator
+            const separator = document.createElement('div');
+            separator.style.height = '1px';
+            separator.style.backgroundColor = 'var(--fb-gray-2)';
+            separator.style.margin = '8px 0';
+            dropdownContent.appendChild(separator);
+            mobileDropdownContent.appendChild(separator.cloneNode(true));
+            
+            // Add common menu items
+            const commonItems = [
+                { text: 'Information', icon: 'fas fa-newspaper', action: () => switchTab('info') },
+                { text: 'Quizzes', icon: 'fas fa-question-circle', action: () => switchTab('quiz') }
+            ];
+            
+            // Add role-specific menu items
+            let roleSpecificItems = [];
+            
+            if (appState.currentUser.role === 'admin') {
+                roleSpecificItems = [
+                    { text: 'Admin Panel', icon: 'fas fa-user-shield', action: () => switchTab('adminPanel') },
+                    { text: 'Change Login Credentials', icon: 'fas fa-key', action: openChangeCredentialsModal }
+                ];
+            } else if (appState.currentUser.role === 'maker') {
+                roleSpecificItems = [
+                    { text: 'Create Quiz', icon: 'fas fa-plus-circle', action: openCreateQuizModal },
+                    { text: 'Create Information', icon: 'fas fa-bullhorn', action: openCreateInfoModal },
+                    { text: 'My Students', icon: 'fas fa-users', action: () => switchTab('makerPanel') },
+                    { text: 'Set Student Code', icon: 'fas fa-user-plus', action: openSetStudentCodeModal },
+                    { text: 'Set Telegram Link', icon: 'fab fa-telegram', action: openTelegramLinkModal },
+                    { text: 'Change Login Credentials', icon: 'fas fa-key', action: openChangeCredentialsModal }
+                ];
+            } else if (appState.currentUser.role === 'student') {
+                roleSpecificItems = [
+                    { text: 'Change Login Credentials', icon: 'fas fa-key', action: openChangeCredentialsModal }
+                ];
             }
             
-            // Store current session
-            sessionStorage.setItem('currentUser', JSON.stringify({
-                username: username,
-                role: role
-            }));
+            // Add logout item
+            const logoutItem = { text: 'Logout', icon: 'fas fa-sign-out-alt', action: handleLogout, isLogout: true };
+            
+            // Combine all items
+            const allItems = [...commonItems, ...roleSpecificItems, logoutItem];
+            
+            // Create menu items
+            allItems.forEach(item => {
+                const menuItem = document.createElement('button');
+                menuItem.className = `dropdown-item ${item.isLogout ? 'logout' : ''}`;
+                menuItem.innerHTML = `<i class="${item.icon}"></i> ${item.text}`;
+                menuItem.onclick = item.action;
+                
+                const mobileMenuItem = document.createElement('button');
+                mobileMenuItem.className = `mobile-menu-item ${item.isLogout ? 'logout' : ''}`;
+                mobileMenuItem.innerHTML = `<i class="${item.icon}"></i> ${item.text}`;
+                mobileMenuItem.onclick = item.action;
+                
+                dropdownContent.appendChild(menuItem);
+                mobileDropdownContent.appendChild(mobileMenuItem);
+            });
         }
 
-        function showAdminAccess() {
-            document.getElementById('adminAccess').classList.toggle('hidden');
+        // Logout handling
+        function handleLogout() {
+            appState.currentUser = null;
+            mobileDropdown.classList.remove('show');
+            
+            // Hide UI elements
+            headerBar.classList.add('d-none');
+            mainContainer.classList.add('d-none');
+            tabsContainer.classList.add('d-none');
+            hamburgerMenu.classList.add('d-none');
+            sortButton.classList.add('d-none');
+            createQuizBtn.classList.add('d-none');
+            createInfoBtn.classList.add('d-none');
+            
+            // Show login modal
+            openModal('loginModal');
         }
 
-        function adminLogin() {
-            const password = document.getElementById('adminPassword').value;
-            if (password === users.admin.password) {
-                successfulLogin('admin', 'admin');
-            } else {
-                showError('Invalid admin password');
-            }
-        }
-
-        function createAccount() {
-            const username = prompt('Choose a username:');
-            if (!username) return;
-
-            if (users[username]) {
-                alert('Username already exists!');
-                return;
-            }
-
-            const role = prompt('Enter role (student/maker):');
-            if (!role || !['student', 'maker'].includes(role)) {
-                alert('Invalid role!');
-                return;
-            }
-
-            const password = prompt('Set your passkey:');
-            if (!password) return;
-
-            // Save new user
-            users[username] = {
-                password: password,
-                role: role,
-                createdAt: new Date().toISOString()
-            };
-            localStorage.setItem('officersnexus_users', JSON.stringify(users));
-
-            alert('Account created successfully! You can now login.');
-        }
-
-        function logout() {
-            // Hide all dashboards
-            document.querySelectorAll('.dashboard').forEach(dash => {
-                dash.classList.add('hidden');
+        // Render information posts
+        function renderInfoPosts() {
+            infoContent.innerHTML = '';
+            
+            // Filter posts based on user role and visibility settings
+            const visiblePosts = appState.infoPosts.filter(post => {
+                if (!post.enabled) return false;
+                
+                if (appState.currentUser.role === 'student') {
+                    return post.showToStudents;
+                } else if (appState.currentUser.role === 'maker') {
+                    return post.showToMakers || post.author === appState.currentUser.name;
+                } else if (appState.currentUser.role === 'admin') {
+                    return true;
+                }
+                return false;
             });
             
-            // Show login screen
-            document.getElementById('loginScreen').classList.remove('hidden');
-            document.getElementById('adminAccess').classList.add('hidden');
+            if (visiblePosts.length === 0) {
+                infoContent.innerHTML = '<p style="text-align: center; color: var(--fb-gray-4); padding: 20px;">No information posts available.</p>';
+                return;
+            }
+            
+            visiblePosts.forEach(post => {
+                const postElement = document.createElement('div');
+                postElement.className = 'info-card';
+                postElement.innerHTML = `
+                    <div class="info-header">
+                        <div>
+                            <div class="info-title">${post.title}</div>
+                            <div class="info-meta">Posted by ${post.author} • ${post.timestamp}</div>
+                        </div>
+                        ${appState.currentUser.role === 'admin' || (appState.currentUser.role === 'maker' && post.author === appState.currentUser.name) ? 
+                        `<div>
+                            <button class="info-btn" onclick="toggleInfoPost(${post.id})" title="${post.enabled ? 'Disable' : 'Enable'}">
+                                <i class="fas fa-${post.enabled ? 'eye' : 'eye-slash'}"></i>
+                            </button>
+                            <button class="info-btn" onclick="editInfoPost(${post.id})" title="Edit">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="info-btn delete" onclick="deleteInfoPost(${post.id})" title="Delete">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>` : ''}
+                    </div>
+                    <div class="info-content">
+                        ${post.content}
+                    </div>
+                    <div class="info-actions">
+                        ${appState.currentUser.role === 'student' ? `
+                        <button class="info-btn" onclick="likePost(${post.id})" title="Like"><i class="far fa-thumbs-up"></i> ${post.likes}</button>
+                        <button class="info-btn" onclick="dislikePost(${post.id})" title="Dislike"><i class="far fa-thumbs-down"></i> ${post.dislikes}</button>
+                        <button class="info-btn" onclick="shareInfoPost(${post.id})" title="Share"><i class="fas fa-share"></i></button>
+                        ` : ''}
+                        ${(appState.currentUser.role === 'admin' || appState.currentUser.role === 'maker') ? `
+                        <span style="font-size: 12px; color: var(--fb-gray-4);">Likes: ${post.likes} | Dislikes: ${post.dislikes}</span>
+                        ` : ''}
+                    </div>
+                `;
+                infoContent.appendChild(postElement);
+            });
+        }
+
+        // Like a post
+        function likePost(postId) {
+            const post = appState.infoPosts.find(p => p.id === postId);
+            if (post) {
+                post.likes++;
+                renderInfoPosts();
+            }
+        }
+
+        // Dislike a post
+        function dislikePost(postId) {
+            const post = appState.infoPosts.find(p => p.id === postId);
+            if (post) {
+                post.dislikes++;
+                renderInfoPosts();
+            }
+        }
+
+        // Share info post
+        function shareInfoPost(postId) {
+            const post = appState.infoPosts.find(p => p.id === postId);
+            if (post) {
+                const shareText = `${post.title}\n\n${post.content}\n\nShared via Officer's Nexus`;
+                copyToClipboard(shareText);
+            }
+        }
+
+        // Helper function for copying to clipboard
+        function copyToClipboard(text) {
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(text).then(() => {
+                    alert('Post content copied to clipboard!');
+                });
+            } else {
+                // Fallback
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                alert('Post content copied to clipboard!');
+            }
+        }
+
+        // Render quizzes
+        function renderQuizzes() {
+            quizContent.innerHTML = '';
+            
+            // Filter quizzes based on user role and enabled status
+            const visibleQuizzes = appState.quizzes.filter(quiz => {
+                if (!quiz.enabled && appState.currentUser.role === 'student') return false;
+                
+                if (appState.currentUser.role === 'admin') {
+                    return true;
+                } else if (appState.currentUser.role === 'maker') {
+                    return quiz.createdBy === appState.currentUser.id || quiz.enabled;
+                } else if (appState.currentUser.role === 'student') {
+                    return quiz.enabled;
+                }
+                return false;
+            });
+            
+            if (visibleQuizzes.length === 0) {
+                quizContent.innerHTML = '<p style="text-align: center; color: var(--fb-gray-4); padding: 20px;">No quizzes available.</p>';
+                return;
+            }
+            
+            visibleQuizzes.forEach(quiz => {
+                const quizElement = document.createElement('div');
+                quizElement.className = 'quiz-card';
+                
+                // Check if user is admin or the quiz creator
+                const isAdmin = appState.currentUser.role === 'admin';
+                const isCreator = appState.currentUser.role === 'maker' && quiz.createdBy === appState.currentUser.id;
+                
+                let actionButtons = '';
+                
+                if (appState.currentUser.role === 'student') {
+                    actionButtons = `
+                        <button class="quiz-btn primary" onclick="attemptQuiz(${quiz.id})" title="Attempt">
+                            <i class="fas fa-play"></i> Attempt
+                        </button>
+                        ${quiz.leaderboardEnabled ? `
+                        <button class="quiz-btn" onclick="viewLeaderboard(${quiz.id})" title="Leaderboard">
+                            <i class="fas fa-chart-line"></i> Leaderboard
+                        </button>
+                        ` : ''}
+                        <button class="quiz-btn" onclick="shareQuizLink(${quiz.id})" title="Share">
+                            <i class="fas fa-share"></i> Share
+                        </button>
+                    `;
+                } else if (isAdmin || isCreator) {
+                    actionButtons = `
+                        <button class="quiz-btn primary" onclick="attemptQuiz(${quiz.id})" title="Attempt">
+                            <i class="fas fa-play"></i> Attempt
+                        </button>
+                        <button class="quiz-btn" onclick="manageQuiz(${quiz.id})" title="Manage">
+                            <i class="fas fa-cog"></i> Manage
+                        </button>
+                        ${quiz.leaderboardEnabled ? `
+                        <button class="quiz-btn" onclick="viewLeaderboard(${quiz.id})" title="Leaderboard">
+                            <i class="fas fa-chart-line"></i> Leaderboard
+                        </button>
+                        ` : ''}
+                        <button class="quiz-btn" onclick="shareQuizLink(${quiz.id})" title="Share">
+                            <i class="fas fa-share"></i> Share
+                        </button>
+                    `;
+                }
+                
+                quizElement.innerHTML = `
+                    <div class="quiz-details">
+                        <div class="quiz-title">${quiz.title}</div>
+                        <div class="quiz-meta">
+                            <span><i class="far fa-clock"></i> ${quiz.duration} min</span>
+                            <span><i class="far fa-question-circle"></i> ${quiz.questions.length} Q</span>
+                            <span><i class="fas fa-check-circle"></i> +${quiz.correctMarks}</span>
+                            <span><i class="fas fa-times-circle"></i> -${quiz.negativeMarks}</span>
+                        </div>
+                    </div>
+                    <div class="quiz-actions">
+                        ${actionButtons}
+                    </div>
+                `;
+                quizContent.appendChild(quizElement);
+            });
+        }
+
+        // Render admin panel
+        function renderAdminPanel() {
+            // Render students list
+            const studentsList = document.getElementById('studentsList');
+            studentsList.innerHTML = '';
+            
+            appState.students.forEach(student => {
+                const studentItem = document.createElement('div');
+                studentItem.className = 'user-list-item';
+                studentItem.innerHTML = `
+                    <div class="user-info">
+                        <div class="user-name">${student.name}</div>
+                        <div class="user-details">
+                            Code: ${student.code} | Maker: ${student.maker} | Status: ${student.status}
+                        </div>
+                    </div>
+                    <div class="user-actions">
+                        <button class="action-btn ${student.status === 'active' ? '' : 'primary'}" onclick="toggleUserStatus(${student.id}, '${student.status}')">
+                            ${student.status === 'active' ? 'Ban' : 'Unban'}
+                        </button>
+                        <button class="action-btn" onclick="deleteUser(${student.id}, 'student')">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                `;
+                studentsList.appendChild(studentItem);
+            });
+            
+            // Render makers list
+            const makersList = document.getElementById('makersList');
+            makersList.innerHTML = '';
+            
+            appState.makers.forEach(maker => {
+                const makerItem = document.createElement('div');
+                makerItem.className = 'user-list-item';
+                makerItem.innerHTML = `
+                    <div class="user-info">
+                        <div class="user-name">${maker.name}</div>
+                        <div class="user-details">
+                            Code: ${maker.code} | Status: ${maker.status}
+                        </div>
+                    </div>
+                    <div class="user-actions">
+                        <button class="action-btn ${maker.status === 'active' ? '' : 'primary'}" onclick="toggleUserStatus(${maker.id}, '${maker.status}')">
+                            ${maker.status === 'active' ? 'Ban' : 'Unban'}
+                        </button>
+                        <button class="action-btn" onclick="deleteUser(${maker.id}, 'maker')">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                `;
+                makersList.appendChild(makerItem);
+            });
+        }
+
+        // Render maker panel
+        function renderMakerPanel() {
+            const myStudentsList = document.getElementById('myStudentsList');
+            myStudentsList.innerHTML = '';
+            
+            // Filter students by maker
+            const myStudents = appState.students.filter(student => 
+                student.makerId === appState.currentUser.id
+            );
+            
+            if (myStudents.length === 0) {
+                myStudentsList.innerHTML = '<p style="text-align: center; color: var(--fb-gray-4); padding: 20px;">No students yet.</p>';
+                return;
+            }
+            
+            myStudents.forEach(student => {
+                const studentItem = document.createElement('div');
+                studentItem.className = 'user-list-item';
+                studentItem.innerHTML = `
+                    <div class="user-info">
+                        <div class="user-name">${student.name}</div>
+                        <div class="user-details">
+                            Code: ${student.code} | Status: ${student.status}
+                        </div>
+                    </div>
+                    <div class="user-actions">
+                        <button class="action-btn ${student.status === 'active' ? '' : 'primary'}" onclick="toggleUserStatus(${student.id}, '${student.status}')">
+                            ${student.status === 'active' ? 'Ban' : 'Unban'}
+                        </button>
+                        <button class="action-btn" onclick="deleteUser(${student.id}, 'student')">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                `;
+                myStudentsList.appendChild(studentItem);
+            });
+        }
+
+        // Create a new quiz
+        function createQuiz() {
+            const title = document.getElementById('quizTitle').value.trim();
+            const duration = document.getElementById('quizDuration').value;
+            const correctMarks = parseFloat(document.getElementById('correctMarks').value);
+            const negativeMarks = parseFloat(document.getElementById('negativeMarks').value);
+            const perQuestionTimerEnabled = document.getElementById('perQuestionTimer').checked;
+            const questionTimer = perQuestionTimerEnabled ? parseInt(document.getElementById('questionTimer').value) : 0;
+            const bulkQuestions = document.getElementById('bulkQuestions').value;
+            
+            if (!title || !duration || isNaN(correctMarks) || isNaN(negativeMarks) || !bulkQuestions) {
+                alert('Please fill in all required fields');
+                return;
+            }
+            
+            // Parse bulk questions
+            const questions = parseBulkQuestions(bulkQuestions);
+            if (questions.length === 0) {
+                alert('Please add at least one valid question');
+                return;
+            }
+            
+            const newQuiz = {
+                id: appState.quizzes.length + 1,
+                title: title,
+                duration: parseInt(duration),
+                correctMarks: correctMarks,
+                negativeMarks: negativeMarks,
+                perQuestionTimer: perQuestionTimerEnabled,
+                questionTimer: questionTimer,
+                questions: questions,
+                enabled: true,
+                leaderboardEnabled: true,
+                createdBy: appState.currentUser.id,
+                createdByName: appState.currentUser.name
+            };
+            
+            appState.quizzes.push(newQuiz);
+            renderQuizzes();
+            closeModal('createQuizModal');
+            
+            alert('Quiz created successfully!');
+        }
+
+        // Parse bulk questions (bilingual format)
+        function parseBulkQuestions(bulkText) {
+            const questions = [];
+            const questionBlocks = bulkText.split('\n\n');
+            
+            questionBlocks.forEach(block => {
+                const lines = block.split('\n').filter(line => line.trim() !== '');
+                if (lines.length < 6) return; // Minimum lines needed
+                
+                const question = {
+                    text: '',
+                    options: [],
+                    correctAnswer: -1,
+                    explanation: ''
+                };
+                
+                lines.forEach(line => {
+                    if (line.startsWith('Q.')) {
+                        question.text = line.substring(2).trim();
+                    } else if (line.startsWith('A.')) {
+                        question.options[0] = line.substring(2).trim();
+                    } else if (line.startsWith('B.')) {
+                        question.options[1] = line.substring(2).trim();
+                    } else if (line.startsWith('C.')) {
+                        question.options[2] = line.substring(2).trim();
+                    } else if (line.startsWith('D.')) {
+                        question.options[3] = line.substring(2).trim();
+                    } else if (line.startsWith('ANS:')) {
+                        const ans = line.substring(4).trim().toUpperCase();
+                        question.correctAnswer = ['A', 'B', 'C', 'D'].indexOf(ans);
+                    } else if (line.startsWith('EXP:')) {
+                        question.explanation = line.substring(4).trim();
+                    }
+                });
+                
+                // Validate question
+                if (question.text && question.options.length === 4 && question.correctAnswer >= 0) {
+                    question.id = questions.length + 1;
+                    questions.push(question);
+                }
+            });
+            
+            return questions;
+        }
+
+        // Create a new information post - FIXED: Now working properly
+        function createInfoPost() {
+            const title = document.getElementById('infoTitle').value.trim();
+            const content = document.getElementById('infoContent').value.trim();
+            
+            // FIXED: Proper validation for both title and content
+            if (!title) {
+                alert('Please enter a title for the post');
+                return;
+            }
+            
+            if (!content) {
+                alert('Please enter content for the post');
+                return;
+            }
+            
+            let showToStudents = true;
+            let showToMakers = true;
+            
+            if (appState.currentUser.role === 'admin' || appState.currentUser.role === 'maker') {
+                showToStudents = document.getElementById('showToStudents').checked;
+                showToMakers = document.getElementById('showToMakers').checked;
+            }
+            
+            const newPost = {
+                id: appState.infoPosts.length + 1,
+                title: title,
+                content: content,
+                author: appState.currentUser.name,
+                showToStudents: showToStudents,
+                showToMakers: showToMakers,
+                enabled: true,
+                timestamp: 'Just now',
+                likes: 0,
+                dislikes: 0
+            };
+            
+            appState.infoPosts.unshift(newPost);
+            renderInfoPosts();
+            closeModal('createInfoModal');
+            
+            alert('Information post published successfully!');
+        }
+
+        // Open create info modal
+        function openCreateInfoModal() {
+            // Show/hide visibility options based on user role
+            const visibilityGroup = document.getElementById('infoVisibilityGroup');
+            if (appState.currentUser.role === 'admin' || appState.currentUser.role === 'maker') {
+                visibilityGroup.classList.remove('d-none');
+            } else {
+                visibilityGroup.classList.add('d-none');
+            }
             
             // Clear form
-            document.getElementById('username').value = '';
-            document.getElementById('passkey').value = '';
-            document.getElementById('adminPassword').value = '';
+            document.getElementById('infoTitle').value = '';
+            document.getElementById('infoContent').value = '';
             
-            // Clear session
-            sessionStorage.removeItem('currentUser');
+            openModal('createInfoModal');
         }
 
-        function showError(message) {
-            // Remove existing error
-            const existingError = document.querySelector('.error-message');
-            if (existingError) existingError.remove();
+        // Toggle information post visibility
+        function toggleInfoPost(postId) {
+            const post = appState.infoPosts.find(p => p.id === postId);
+            if (post) {
+                post.enabled = !post.enabled;
+                renderInfoPosts();
+            }
+        }
 
-            // Create new error
-            const errorDiv = document.createElement('div');
-            errorDiv.className = 'error-message';
-            errorDiv.textContent = message;
+        // Edit information post - FIXED: Now working properly
+        function editInfoPost(postId) {
+            const post = appState.infoPosts.find(p => p.id === postId);
+            if (post) {
+                // Populate the create info modal with post data
+                document.getElementById('infoTitle').value = post.title;
+                document.getElementById('infoContent').value = post.content;
+                
+                if (appState.currentUser.role === 'admin' || appState.currentUser.role === 'maker') {
+                    document.getElementById('showToStudents').checked = post.showToStudents;
+                    document.getElementById('showToMakers').checked = post.showToMakers;
+                }
+                
+                // Remove the old post
+                appState.infoPosts = appState.infoPosts.filter(p => p.id !== postId);
+                
+                // Open the create modal in edit mode
+                openCreateInfoModal();
+                
+                alert('You can now edit the post. Click "Publish Post" to save changes.');
+            }
+        }
+
+        // Delete information post
+        function deleteInfoPost(postId) {
+            if (confirm('Are you sure you want to delete this post?')) {
+                appState.infoPosts = appState.infoPosts.filter(post => post.id !== postId);
+                renderInfoPosts();
+            }
+        }
+
+        // Attempt a quiz - FIXED: Now uses full page rules instead of modal
+        function attemptQuiz(quizId) {
+            const quiz = appState.quizzes.find(q => q.id === quizId);
+            if (quiz) {
+                appState.currentQuiz = quiz;
+                
+                // Set rules page content
+                document.getElementById('rulesDuration').textContent = quiz.duration;
+                document.getElementById('rulesCorrectMarks').textContent = quiz.correctMarks;
+                document.getElementById('rulesNegativeMarks').textContent = quiz.negativeMarks;
+                
+                // Reset agreement checkbox
+                document.getElementById('agreeRules').checked = false;
+                document.getElementById('startQuizBtn').disabled = true;
+                
+                // Enable start button when rules are agreed
+                document.getElementById('agreeRules').addEventListener('change', function() {
+                    document.getElementById('startQuizBtn').disabled = !this.checked;
+                });
+                
+                // Hide main UI and show rules page
+                headerBar.classList.add('d-none');
+                mainContainer.classList.add('d-none');
+                tabsContainer.classList.add('d-none');
+                document.getElementById('quizRulesPage').style.display = 'block';
+            }
+        }
+
+        // Go back to quizzes from rules page
+        function goBackToQuizzes() {
+            document.getElementById('quizRulesPage').style.display = 'none';
+            headerBar.classList.remove('d-none');
+            mainContainer.classList.remove('d-none');
+            tabsContainer.classList.remove('d-none');
+        }
+
+        // Start quiz from rules page
+        function startQuizFromRules() {
+            if (!document.getElementById('agreeRules').checked) {
+                alert('Please agree to the quiz rules before starting');
+                return;
+            }
             
-            document.querySelector('.login-box').appendChild(errorDiv);
-        }
-
-        // Dashboard Functions
-        function attemptQuiz() {
-            alert('Quiz attempt feature coming soon!');
-        }
-
-        function viewResults() {
-            alert('Results feature coming soon!');
-        }
-
-        function viewRankings() {
-            alert('Rankings feature coming soon!');
-        }
-
-        function createQuiz() {
-            alert('Quiz creation feature coming soon!');
-        }
-
-        function manageQuizzes() {
-            alert('Quiz management feature coming soon!');
-        }
-
-        function quizAnalytics() {
-            alert('Analytics feature coming soon!');
-        }
-
-        function generateLink() {
-            alert('Link generation feature coming soon!');
-        }
-
-        function manageUsers() {
-            alert('User management feature coming soon!');
-        }
-
-        function viewPasswords() {
-            let passwordList = 'All Passwords:\n\n';
-            for (const [username, user] of Object.entries(users)) {
-                passwordList += `${username} (${user.role}): ${user.password}\n`;
+            document.getElementById('quizRulesPage').style.display = 'none';
+            
+            // Initialize quiz attempt
+            appState.quizAttempt = {
+                currentQuestion: 0,
+                answers: new Array(appState.currentQuiz.questions.length).fill(null),
+                startTime: new Date(),
+                endTime: null,
+                timerInterval: null,
+                questionTimerInterval: null,
+                timeLeft: appState.currentQuiz.duration * 60, // Convert to seconds
+                questionTimeLeft: appState.currentQuiz.perQuestionTimer ? appState.currentQuiz.questionTimer : 0,
+                currentLanguage: 'english'
+            };
+            
+            // Show quiz interface
+            document.getElementById('quizInterface').style.display = 'block';
+            
+            // Start quiz interface
+            showQuestion(0);
+            
+            // Start timers
+            startQuizTimer();
+            if (appState.currentQuiz.perQuestionTimer) {
+                startQuestionTimer();
             }
-            alert(passwordList);
         }
 
-        function resetPasswords() {
-            alert('Password reset feature coming soon!');
+        // Start quiz timer
+        function startQuizTimer() {
+            appState.quizAttempt.timerInterval = setInterval(function() {
+                appState.quizAttempt.timeLeft--;
+                
+                const minutes = Math.floor(appState.quizAttempt.timeLeft / 60);
+                const seconds = appState.quizAttempt.timeLeft % 60;
+                
+                document.getElementById('quizTimer').textContent = 
+                    `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                
+                if (appState.quizAttempt.timeLeft <= 0) {
+                    clearInterval(appState.quizAttempt.timerInterval);
+                    if (appState.quizAttempt.questionTimerInterval) {
+                        clearInterval(appState.quizAttempt.questionTimerInterval);
+                    }
+                    submitQuiz();
+                }
+            }, 1000);
         }
 
-        function systemAnalytics() {
-            alert('System analytics feature coming soon!');
+        // Start per question timer - FIXED: Now showing properly
+        function startQuestionTimer() {
+            const questionTimerElement = document.getElementById('questionTimerDisplay');
+            questionTimerElement.classList.remove('d-none');
+            
+            appState.quizAttempt.questionTimerInterval = setInterval(function() {
+                appState.quizAttempt.questionTimeLeft--;
+                questionTimerElement.textContent = `${appState.quizAttempt.questionTimeLeft}s`;
+                
+                if (appState.quizAttempt.questionTimeLeft <= 0) {
+                    // Auto move to next question
+                    if (appState.quizAttempt.currentQuestion < appState.currentQuiz.questions.length - 1) {
+                        nextQuestion();
+                    }
+                }
+            }, 1000);
         }
 
-        // Check for existing session on page load
-        window.addEventListener('load', function() {
-            const currentUser = sessionStorage.getItem('currentUser');
-            if (currentUser) {
-                const user = JSON.parse(currentUser);
-                successfulLogin(user.username, user.role);
+        // Reset question timer when moving to new question
+        function resetQuestionTimer() {
+            if (appState.currentQuiz.perQuestionTimer) {
+                appState.quizAttempt.questionTimeLeft = appState.currentQuiz.questionTimer;
+                document.getElementById('questionTimerDisplay').textContent = `${appState.quizAttempt.questionTimeLeft}s`;
             }
-        });
+        }
+
+        // Show question in quiz interface
+        function showQuestion(index) {
+            if (index < 0 || index >= appState.currentQuiz.questions.length) return;
+            
+            appState.quizAttempt.currentQuestion = index;
+            const question = appState.currentQuiz.questions[index];
+            
+            // Reset question timer
+            if (appState.currentQuiz.perQuestionTimer) {
+                resetQuestionTimer();
+            }
+            
+            // Get text based on current language
+            const questionText = getTextByLanguage(question.text);
+            
+            // Update question text
+            document.getElementById('currentQuestion').textContent = `Q${index + 1}. ${questionText}`;
+            
+            // Update options
+            const optionsContainer = document.getElementById('quizOptions');
+            optionsContainer.innerHTML = '';
+            
+            question.options.forEach((option, i) => {
+                const optionText = getTextByLanguage(option);
+                const optionElement = document.createElement('div');
+                optionElement.className = `quiz-option ${appState.quizAttempt.answers[index] === i ? 'selected' : ''}`;
+                optionElement.textContent = `${String.fromCharCode(65 + i)}. ${optionText}`;
+                optionElement.onclick = () => selectOption(i);
+                optionsContainer.appendChild(optionElement);
+            });
+            
+            // Update navigation buttons
+            document.querySelector('.quiz-navigation button:nth-child(1)').disabled = index === 0;
+            document.querySelector('.quiz-navigation button:nth-child(3)').disabled = index === appState.currentQuiz.questions.length - 1;
+        }
+
+        // Get text based on current language (bilingual support)
+        function getTextByLanguage(text) {
+            if (!text) return '';
+            
+            if (appState.quizAttempt.currentLanguage === 'english') {
+                return text.split(' / ')[0] || text;
+            } else {
+                const parts = text.split(' / ');
+                return parts.length > 1 ? parts[1] : text;
+            }
+        }
+
+        // Select an option in the quiz
+        function selectOption(optionIndex) {
+            const currentIndex = appState.quizAttempt.currentQuestion;
+            appState.quizAttempt.answers[currentIndex] = optionIndex;
+            
+            // Update UI to show selected option
+            const options = document.querySelectorAll('.quiz-option');
+            options.forEach((option, i) => {
+                if (i === optionIndex) {
+                    option.classList.add('selected');
+                } else {
+                    option.classList.remove('selected');
+                }
+            });
+        }
+
+        // Navigate to previous question
+        function previousQuestion() {
+            showQuestion(appState.quizAttempt.currentQuestion - 1);
+        }
+
+        // Navigate to next question
+        function nextQuestion() {
+            showQuestion(appState.quizAttempt.currentQuestion + 1);
+        }
+
+        // Clear current answer
+        function clearAnswer() {
+            const currentIndex = appState.quizAttempt.currentQuestion;
+            appState.quizAttempt.answers[currentIndex] = null;
+            
+            // Update UI
+            const options = document.querySelectorAll('.quiz-option');
+            options.forEach(option => {
+                option.classList.remove('selected');
+            });
+        }
+
+        // Toggle language in quiz
+        function toggleLanguage() {
+            appState.quizAttempt.currentLanguage = 
+                appState.quizAttempt.currentLanguage === 'english' ? 'hindi' : 'english';
+            
+            document.getElementById('languageText').textContent = 
+                appState.quizAttempt.currentLanguage === 'english' ? 'English' : 'हिंदी';
+            
+            // Refresh current question with new language
+            showQuestion(appState.quizAttempt.currentQuestion);
+        }
+
+        // Show question jump modal
+        function showQuestionJump() {
+            const questionGrid = document.getElementById('questionGrid');
+            questionGrid.innerHTML = '';
+            
+            appState.currentQuiz.questions.forEach((_, index) => {
+                const questionBtn = document.createElement('button');
+                questionBtn.className = `action-btn ${appState.quizAttempt.answers[index] !== null ? 'primary' : ''}`;
+                questionBtn.textContent = index + 1;
+                questionBtn.onclick = () => {
+                    closeModal('questionJumpModal');
+                    showQuestion(index);
+                };
+                questionGrid.appendChild(questionBtn);
+            });
+            
+            openModal('questionJumpModal');
+        }
+
+        // Quit quiz
+        function quitQuiz() {
+            if (confirm('Are you sure you want to quit the quiz? Your progress will be lost.')) {
+                clearInterval(appState.quizAttempt.timerInterval);
+                if (appState.quizAttempt.questionTimerInterval) {
+                    clearInterval(appState.quizAttempt.questionTimerInterval);
+                }
+                document.getElementById('quizInterface').style.display = 'none';
+                headerBar.classList.remove('d-none');
+                mainContainer.classList.remove('d-none');
+                tabsContainer.classList.remove('d-none');
+                closeModal('questionJumpModal');
+            }
+        }
+
+        // Submit quiz
+        function submitQuiz() {
+            if (confirm('Are you sure you want to submit the quiz? You cannot change your answers after submission.')) {
+                clearInterval(appState.quizAttempt.timerInterval);
+                if (appState.quizAttempt.questionTimerInterval) {
+                    clearInterval(appState.quizAttempt.questionTimerInterval);
+                }
+                appState.quizAttempt.endTime = new Date();
+                showResults();
+            }
+        }
+
+        // Show quiz results
+        function showResults() {
+            // Hide quiz interface and show main header
+            document.getElementById('quizInterface').style.display = 'none';
+            
+            // Calculate results
+            const quiz = appState.currentQuiz;
+            const answers = appState.quizAttempt.answers;
+            let correct = 0;
+            let incorrect = 0;
+            let attempted = 0;
+            
+            answers.forEach((answer, index) => {
+                if (answer !== null) {
+                    attempted++;
+                    if (answer === quiz.questions[index].correctAnswer) {
+                        correct++;
+                    } else {
+                        incorrect++;
+                    }
+                }
+            });
+            
+            const score = (correct * quiz.correctMarks) - (incorrect * quiz.negativeMarks);
+            const timeTaken = Math.floor((appState.quizAttempt.endTime - appState.quizAttempt.startTime) / 1000);
+            const minutes = Math.floor(timeTaken / 60);
+            const seconds = timeTaken % 60;
+            const avgTime = attempted > 0 ? Math.floor(timeTaken / attempted) : 0;
+            
+            // Update results UI
+            document.getElementById('statAttempted').textContent = attempted;
+            document.getElementById('statCorrect').textContent = correct;
+            document.getElementById('statIncorrect').textContent = incorrect;
+            document.getElementById('statScore').textContent = score.toFixed(2);
+            document.getElementById('statTime').textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+            document.getElementById('statAvgTime').textContent = `${avgTime}s`;
+            
+            // Show results page
+            document.getElementById('resultsPage').style.display = 'block';
+        }
+
+        // Go to dashboard from results
+        function goToDashboard() {
+            document.getElementById('resultsPage').style.display = 'none';
+            headerBar.classList.remove('d-none');
+            mainContainer.classList.remove('d-none');
+            tabsContainer.classList.remove('d-none');
+            switchTab('quiz');
+        }
+
+        // Open share results modal
+        function openShareResultsModal() {
+            const quiz = appState.currentQuiz;
+            const resultsText = `
+Quiz: ${quiz.title}
+Attempted: ${document.getElementById('statAttempted').textContent}
+Correct: ${document.getElementById('statCorrect').textContent}
+Incorrect: ${document.getElementById('statIncorrect').textContent}
+Score: ${document.getElementById('statScore').textContent}
+Time Taken: ${document.getElementById('statTime').textContent}
+Average Time/Question: ${document.getElementById('statAvgTime').textContent}
+
+Shared via Officer's Nexus
+            `.trim();
+            
+            document.getElementById('shareResultsContent').innerHTML = `
+                <h3>Your Quiz Results</h3>
+                <pre style="background: var(--fb-gray-1); padding: 15px; border-radius: 6px; white-space: pre-wrap;">${resultsText}</pre>
+            `;
+            
+            openModal('shareResultsModal');
+        }
+
+        // Copy results to clipboard - FIXED: Now includes proper links
+        function copyResults() {
+            const quiz = appState.currentQuiz;
+            const resultsText = `
+Quiz: ${quiz.title}
+Attempted: ${document.getElementById('statAttempted').textContent}
+Correct: ${document.getElementById('statCorrect').textContent}
+Incorrect: ${document.getElementById('statIncorrect').textContent}
+Score: ${document.getElementById('statScore').textContent}
+Time Taken: ${document.getElementById('statTime').textContent}
+Average Time/Question: ${document.getElementById('statAvgTime').textContent}
+
+Shared via Officer's Nexus
+Join us: https://t.me/officersnexus
+Quiz Link: https://officersnexus.com/quiz/${quiz.id}
+            `.trim();
+            
+            // Use modern clipboard API with fallback
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(resultsText).then(() => {
+                    alert('Results copied to clipboard!');
+                }).catch(err => {
+                    // Fallback for older browsers
+                    copyUsingFallback(resultsText);
+                });
+            } else {
+                // Fallback for older browsers
+                copyUsingFallback(resultsText);
+            }
+        }
+
+        // Fallback method for copying
+        function copyUsingFallback(text) {
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            textArea.style.position = 'fixed';
+            textArea.style.left = '-999999px';
+            textArea.style.top = '-999999px';
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            
+            try {
+                document.execCommand('copy');
+                alert('Results copied to clipboard!');
+            } catch (err) {
+                alert('Failed to copy results. Please copy manually.');
+                console.error('Fallback: Oops, unable to copy', err);
+            }
+            
+            document.body.removeChild(textArea);
+        }
+
+        // Share results to Telegram
+        function shareToTelegram() {
+            if (appState.makerTelegramLink) {
+                const quiz = appState.currentQuiz;
+                const resultsText = `I scored ${document.getElementById('statScore').textContent} in "${quiz.title}" on Officer's Nexus!`;
+                window.open(appState.makerTelegramLink + '?text=' + encodeURIComponent(resultsText), '_blank');
+            } else {
+                alert('No Telegram link set by your maker.');
+            }
+        }
+
+        // Show answer key - FIXED: Now working properly
+        function showAnswerKey() {
+            const quiz = appState.currentQuiz;
+            let answerKeyHTML = '';
+            
+            quiz.questions.forEach((question, index) => {
+                const userAnswer = appState.quizAttempt.answers[index];
+                const isCorrect = userAnswer === question.correctAnswer;
+                
+                const questionText = getTextByLanguageForAnswerKey(question.text);
+                const userAnswerText = userAnswer !== null ? 
+                    getTextByLanguageForAnswerKey(question.options[userAnswer]) : 'Not attempted';
+                const correctAnswerText = getTextByLanguageForAnswerKey(question.options[question.correctAnswer]);
+                const explanationText = getTextByLanguageForAnswerKey(question.explanation);
+                
+                answerKeyHTML += `
+                    <div class="info-card" style="margin-bottom: 15px;">
+                        <div class="info-title">Q${index + 1}. ${questionText}</div>
+                        <div class="info-content">
+                            <p><strong>Your Answer:</strong> ${userAnswer !== null ? `${String.fromCharCode(65 + userAnswer)}. ${userAnswerText}` : 'Not attempted'} ${isCorrect ? '✓' : userAnswer !== null ? '✗' : ''}</p>
+                            <p><strong>Correct Answer:</strong> ${String.fromCharCode(65 + question.correctAnswer)}. ${correctAnswerText}</p>
+                            ${explanationText ? `<p><strong>Explanation:</strong> ${explanationText}</p>` : ''}
+                        </div>
+                    </div>
+                `;
+            });
+            
+            document.getElementById('answerKeyContent').innerHTML = answerKeyHTML;
+            openModal('answerKeyModal');
+        }
+
+        // Get text for answer key based on language
+        function getTextByLanguageForAnswerKey(text) {
+            if (!text) return '';
+            
+            if (appState.answerKeyLanguage === 'english') {
+                return text.split(' / ')[0] || text;
+            } else {
+                const parts = text.split(' / ');
+                return parts.length > 1 ? parts[1] : text;
+            }
+        }
+
+        // Toggle answer key language
+        function toggleAnswerKeyLanguage() {
+            appState.answerKeyLanguage = 
+                appState.answerKeyLanguage === 'english' ? 'hindi' : 'english';
+            
+            document.getElementById('answerKeyLanguage').textContent = 
+                appState.answerKeyLanguage === 'english' ? 'English' : 'हिंदी';
+            
+            // Refresh answer key with new language
+            showAnswerKey();
+        }
+
+        // Manage a quiz
+        function manageQuiz(quizId) {
+            const quiz = appState.quizzes.find(q => q.id === quizId);
+            if (quiz) {
+                document.getElementById('enableQuiz').checked = quiz.enabled;
+                document.getElementById('enableLeaderboard').checked = quiz.leaderboardEnabled;
+                appState.currentQuiz = quiz;
+                openModal('manageQuizModal');
+            }
+        }
+
+        // Save quiz settings
+        function saveQuizSettings() {
+            if (appState.currentQuiz) {
+                appState.currentQuiz.enabled = document.getElementById('enableQuiz').checked;
+                appState.currentQuiz.leaderboardEnabled = document.getElementById('enableLeaderboard').checked;
+                renderQuizzes();
+                closeModal('manageQuizModal');
+                alert('Quiz settings saved successfully!');
+            }
+        }
+
+        // Edit quiz - FIXED: Added per question timer option in edit modal
+        function editQuiz() {
+            if (appState.currentQuiz) {
+                // Populate edit form with current quiz data
+                document.getElementById('editQuizTitle').value = appState.currentQuiz.title;
+                document.getElementById('editQuizDuration').value = appState.currentQuiz.duration;
+                document.getElementById('editCorrectMarks').value = appState.currentQuiz.correctMarks;
+                document.getElementById('editNegativeMarks').value = appState.currentQuiz.negativeMarks;
+                document.getElementById('editPerQuestionTimer').checked = appState.currentQuiz.perQuestionTimer;
+                document.getElementById('editQuestionTimer').value = appState.currentQuiz.questionTimer;
+                
+                // Show/hide question timer group based on checkbox
+                if (appState.currentQuiz.perQuestionTimer) {
+                    document.getElementById('editQuestionTimerGroup').classList.remove('d-none');
+                } else {
+                    document.getElementById('editQuestionTimerGroup').classList.add('d-none');
+                }
+                
+                // Add event listener for per question timer checkbox
+                document.getElementById('editPerQuestionTimer').addEventListener('change', function() {
+                    if (this.checked) {
+                        document.getElementById('editQuestionTimerGroup').classList.remove('d-none');
+                    } else {
+                        document.getElementById('editQuestionTimerGroup').classList.add('d-none');
+                    }
+                });
+                
+                // Populate questions for editing
+                const questionsList = document.getElementById('editQuestionsList');
+                questionsList.innerHTML = '';
+                
+                appState.currentQuiz.questions.forEach((question, index) => {
+                    const questionItem = document.createElement('div');
+                    questionItem.className = 'info-card';
+                    questionItem.innerHTML = `
+                        <div class="info-title">Q${index + 1}. ${question.text}</div>
+                        <div class="info-content">
+                            <p><strong>Options:</strong></p>
+                            <ul>
+                                ${question.options.map((opt, i) => `<li>${String.fromCharCode(65 + i)}. ${opt}</li>`).join('')}
+                            </ul>
+                            <p><strong>Correct Answer:</strong> ${String.fromCharCode(65 + question.correctAnswer)}</p>
+                            ${question.explanation ? `<p><strong>Explanation:</strong> ${question.explanation}</p>` : ''}
+                        </div>
+                        <div class="info-actions">
+                            <button class="info-btn" onclick="editQuestion(${index})">
+                                <i class="fas fa-edit"></i> Edit Question
+                            </button>
+                            <button class="info-btn delete" onclick="removeQuestionFromQuiz(${index})">
+                                <i class="fas fa-trash"></i> Remove
+                            </button>
+                        </div>
+                    `;
+                    questionsList.appendChild(questionItem);
+                });
+                
+                openModal('editQuizModal');
+            }
+        }
+
+        // Edit a specific question - FIXED: Now properly edits question and options
+        function editQuestion(questionIndex) {
+            const question = appState.currentQuiz.questions[questionIndex];
+            if (question) {
+                // Create a comprehensive edit form
+                let editForm = `
+                    <div style="margin-bottom: 15px;">
+                        <label><strong>Question Text (Bilingual):</strong></label>
+                        <textarea id="editQuestionText" style="width: 100%; height: 80px; margin-top: 5px;">${question.text}</textarea>
+                    </div>
+                    <div style="margin-bottom: 15px;">
+                        <label><strong>Options (Bilingual):</strong></label>
+                `;
+                
+                question.options.forEach((option, i) => {
+                    editForm += `
+                        <div style="margin-bottom: 8px;">
+                            <label>${String.fromCharCode(65 + i)}:</label>
+                            <input type="text" id="editOption${i}" value="${option}" style="width: 100%; margin-top: 2px;">
+                        </div>
+                    `;
+                });
+                
+                editForm += `
+                    </div>
+                    <div style="margin-bottom: 15px;">
+                        <label><strong>Correct Answer:</strong></label>
+                        <select id="editCorrectAnswer" style="width: 100%; margin-top: 5px;">
+                            <option value="0" ${question.correctAnswer === 0 ? 'selected' : ''}>A</option>
+                            <option value="1" ${question.correctAnswer === 1 ? 'selected' : ''}>B</option>
+                            <option value="2" ${question.correctAnswer === 2 ? 'selected' : ''}>C</option>
+                            <option value="3" ${question.correctAnswer === 3 ? 'selected' : ''}>D</option>
+                        </select>
+                    </div>
+                    <div style="margin-bottom: 15px;">
+                        <label><strong>Explanation (Bilingual):</strong></label>
+                        <textarea id="editExplanation" style="width: 100%; height: 60px; margin-top: 5px;">${question.explanation || ''}</textarea>
+                    </div>
+                    <button onclick="saveQuestionEdit(${questionIndex})" style="background: var(--fb-blue); color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">Save Changes</button>
+                `;
+                
+                // Show edit form in a modal or alert
+                const editModal = document.createElement('div');
+                editModal.style.position = 'fixed';
+                editModal.style.top = '0';
+                editModal.style.left = '0';
+                editModal.style.width = '100%';
+                editModal.style.height = '100%';
+                editModal.style.backgroundColor = 'rgba(0,0,0,0.5)';
+                editModal.style.display = 'flex';
+                editModal.style.justifyContent = 'center';
+                editModal.style.alignItems = 'center';
+                editModal.style.zIndex = '4000';
+                
+                editModal.innerHTML = `
+                    <div style="background: white; padding: 20px; border-radius: 8px; width: 90%; max-width: 600px; max-height: 80vh; overflow-y: auto;">
+                        <h3>Edit Question ${questionIndex + 1}</h3>
+                        ${editForm}
+                        <button onclick="this.parentElement.parentElement.remove()" style="background: var(--fb-red); color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; margin-top: 10px;">Cancel</button>
+                    </div>
+                `;
+                
+                document.body.appendChild(editModal);
+            }
+        }
+
+        // Save question edit
+        function saveQuestionEdit(questionIndex) {
+            const questionText = document.getElementById('editQuestionText').value;
+            const optionA = document.getElementById('editOption0').value;
+            const optionB = document.getElementById('editOption1').value;
+            const optionC = document.getElementById('editOption2').value;
+            const optionD = document.getElementById('editOption3').value;
+            const correctAnswer = parseInt(document.getElementById('editCorrectAnswer').value);
+            const explanation = document.getElementById('editExplanation').value;
+            
+            if (questionText && optionA && optionB && optionC && optionD) {
+                appState.currentQuiz.questions[questionIndex].text = questionText;
+                appState.currentQuiz.questions[questionIndex].options = [optionA, optionB, optionC, optionD];
+                appState.currentQuiz.questions[questionIndex].correctAnswer = correctAnswer;
+                appState.currentQuiz.questions[questionIndex].explanation = explanation;
+                
+                // Remove the edit modal
+                document.querySelector('div[style*="position: fixed"][style*="z-index: 4000"]').remove();
+                
+                // Refresh the edit quiz modal
+                editQuiz();
+                
+                alert('Question updated successfully!');
+            } else {
+                alert('Please fill in all fields');
+            }
+        }
+
+        // Remove a question from quiz
+        function removeQuestionFromQuiz(questionIndex) {
+            if (confirm('Are you sure you want to remove this question?')) {
+                appState.currentQuiz.questions.splice(questionIndex, 1);
+                editQuiz(); // Refresh the edit modal
+            }
+        }
+
+        // Save quiz edit - FIXED: Now saves per question timer settings
+        function saveQuizEdit() {
+            if (appState.currentQuiz) {
+                appState.currentQuiz.title = document.getElementById('editQuizTitle').value;
+                appState.currentQuiz.duration = parseInt(document.getElementById('editQuizDuration').value);
+                appState.currentQuiz.correctMarks = parseFloat(document.getElementById('editCorrectMarks').value);
+                appState.currentQuiz.negativeMarks = parseFloat(document.getElementById('editNegativeMarks').value);
+                appState.currentQuiz.perQuestionTimer = document.getElementById('editPerQuestionTimer').checked;
+                appState.currentQuiz.questionTimer = document.getElementById('editPerQuestionTimer').checked ? 
+                    parseInt(document.getElementById('editQuestionTimer').value) : 0;
+                
+                renderQuizzes();
+                closeModal('editQuizModal');
+                alert('Quiz updated successfully!');
+            }
+        }
+
+        // Share quiz
+        function shareQuiz() {
+            if (appState.currentQuiz) {
+                const quizLink = `https://officersnexus.com/quiz/${appState.currentQuiz.id}`;
+                alert(`Share this link with students:\n\n${quizLink}\n\nIn a real application, this would generate a proper shareable link.`);
+            }
+        }
+
+        // Share quiz link
+        function shareQuizLink(quizId) {
+            const quiz = appState.quizzes.find(q => q.id === quizId);
+            if (quiz) {
+                const quizLink = `https://officersnexus.com/quiz/${quiz.id}`;
+                alert(`Share this quiz link:\n\n${quizLink}`);
+            }
+        }
+
+        // Delete quiz
+        function deleteQuiz() {
+            if (appState.currentQuiz && confirm('Are you sure you want to delete this quiz?')) {
+                appState.quizzes = appState.quizzes.filter(q => q.id !== appState.currentQuiz.id);
+                renderQuizzes();
+                closeModal('manageQuizModal');
+            }
+        }
+
+        // View leaderboard for a quiz
+        function viewLeaderboard(quizId) {
+            const quiz = appState.quizzes.find(q => q.id === quizId);
+            if (quiz) {
+                // In a real application, this would fetch leaderboard data from a database
+                document.getElementById('leaderboardContent').innerHTML = `
+                    <h3>Leaderboard for: ${quiz.title}</h3>
+                    <p>This feature would display student rankings and scores in a real application.</p>
+                    <p>For now, here's a sample leaderboard:</p>
+                    <ol>
+                        <li>Student A - 95%</li>
+                        <li>Student B - 87%</li>
+                        <li>Student C - 82%</li>
+                        <li>Student D - 78%</li>
+                        <li>Student E - 75%</li>
+                    </ol>
+                `;
+                openModal('leaderboardModal');
+            }
+        }
+
+        // Open sort modal
+        function openSortModal() {
+            openModal('sortModal');
+        }
+
+        // Apply sort
+        function applySort() {
+            const criteria = document.getElementById('sortCriteria').value;
+            
+            switch(criteria) {
+                case 'title':
+                    appState.quizzes.sort((a, b) => a.title.localeCompare(b.title));
+                    break;
+                case 'duration':
+                    appState.quizzes.sort((a, b) => a.duration - b.duration);
+                    break;
+                case 'questions':
+                    appState.quizzes.sort((a, b) => a.questions.length - b.questions.length);
+                    break;
+                case 'date':
+                    // For demo, we'll just reverse the array
+                    appState.quizzes.reverse();
+                    break;
+            }
+            
+            renderQuizzes();
+            closeModal('sortModal');
+            alert('Quizzes sorted successfully!');
+        }
+
+        // Refresh information posts
+        function refreshInfo() {
+            alert('Information posts refreshed!');
+            renderInfoPosts();
+        }
+
+        // Refresh quizzes
+        function refreshQuizzes() {
+            alert('Quizzes refreshed!');
+            renderQuizzes();
+        }
+
+        // Open forgot code modal
+        function openForgotCodeModal() {
+            closeModal('loginModal');
+            openModal('forgotCodeModal');
+        }
+
+        // Open add maker modal
+        function openAddMakerModal() {
+            document.getElementById('makerName').value = '';
+            document.getElementById('makerCode').value = '';
+            openModal('addMakerModal');
+        }
+
+        // Add maker
+        function addMaker() {
+            const name = document.getElementById('makerName').value.trim();
+            const code = document.getElementById('makerCode').value.trim();
+            
+            if (!name || !code) {
+                alert('Please fill in all fields');
+                return;
+            }
+            
+            // Check if maker already exists
+            if (appState.makers.find(m => m.name === name || m.code === code)) {
+                alert('Maker with this name or code already exists');
+                return;
+            }
+            
+            const newMaker = {
+                id: appState.makers.length + 1,
+                name: name,
+                code: code,
+                status: 'active',
+                role: 'maker'
+            };
+            
+            appState.makers.push(newMaker);
+            renderAdminPanel();
+            closeModal('addMakerModal');
+            
+            alert('Maker added successfully!');
+        }
+
+        // Open change credentials modal
+        function openChangeCredentialsModal() {
+            document.getElementById('currentCode').value = appState.currentUser.code;
+            document.getElementById('newName').value = appState.currentUser.name;
+            document.getElementById('newCode').value = '';
+            openModal('changeCredentialsModal');
+        }
+
+        // Change credentials
+        function changeCredentials() {
+            const currentCode = document.getElementById('currentCode').value;
+            const newName = document.getElementById('newName').value.trim();
+            const newCode = document.getElementById('newCode').value.trim();
+            
+            if (!currentCode) {
+                alert('Please enter your current code');
+                return;
+            }
+            
+            if (!newName && !newCode) {
+                alert('Please enter at least one new credential');
+                return;
+            }
+            
+            // Verify current code
+            if (currentCode !== appState.currentUser.code) {
+                alert('Current code is incorrect');
+                return;
+            }
+            
+            // Check if new name already exists (for students)
+            if (newName && appState.currentUser.role === 'student') {
+                const existingStudent = appState.students.find(s => s.name === newName && s.id !== appState.currentUser.id);
+                if (existingStudent) {
+                    alert('This name is already taken. Please choose a different name.');
+                    return;
+                }
+            }
+            
+            // Check if new code already exists
+            if (newCode) {
+                let existingUser;
+                if (appState.currentUser.role === 'student') {
+                    existingUser = appState.students.find(s => s.code === newCode && s.id !== appState.currentUser.id);
+                } else if (appState.currentUser.role === 'maker') {
+                    existingUser = appState.makers.find(m => m.code === newCode && m.id !== appState.currentUser.id);
+                }
+                
+                if (existingUser) {
+                    alert('This code is already in use. Please choose a different code.');
+                    return;
+                }
+            }
+            
+            // Update user credentials
+            if (newName) {
+                appState.currentUser.name = newName;
+                appState.currentUser.avatar = newName.charAt(0).toUpperCase();
+            }
+            
+            if (newCode) {
+                appState.currentUser.code = newCode;
+            }
+            
+            // Update first login status
+            if (appState.currentUser.firstLogin) {
+                appState.currentUser.firstLogin = false;
+            }
+            
+            // Update UI
+            updateUIForUser();
+            closeModal('changeCredentialsModal');
+            
+            alert('Credentials updated successfully!');
+        }
+
+        // Toggle user status
+        function toggleUserStatus(userId, currentStatus) {
+            const newStatus = currentStatus === 'active' ? 'banned' : 'active';
+            
+            // Find user in appropriate array
+            let user = appState.students.find(s => s.id === userId);
+            let userType = 'student';
+            
+            if (!user) {
+                user = appState.makers.find(m => m.id === userId);
+                userType = 'maker';
+            }
+            
+            if (user) {
+                user.status = newStatus;
+                
+                // Update UI based on current view
+                if (appState.currentTab === 'adminPanel') {
+                    renderAdminPanel();
+                } else if (appState.currentTab === 'makerPanel') {
+                    renderMakerPanel();
+                }
+                
+                alert(`${userType.charAt(0).toUpperCase() + userType.slice(1)} ${newStatus} successfully!`);
+            }
+        }
+
+        // Delete user
+        function deleteUser(userId, userType) {
+            if (confirm(`Are you sure you want to delete this ${userType}? This action cannot be undone.`)) {
+                if (userType === 'student') {
+                    appState.students = appState.students.filter(s => s.id !== userId);
+                } else {
+                    appState.makers = appState.makers.filter(m => m.id !== userId);
+                }
+                
+                // Update UI based on current view
+                if (appState.currentTab === 'adminPanel') {
+                    renderAdminPanel();
+                } else if (appState.currentTab === 'makerPanel') {
+                    renderMakerPanel();
+                }
+                
+                alert(`${userType.charAt(0).toUpperCase() + userType.slice(1)} deleted successfully!`);
+            }
+        }
+
+        // Open set student code modal
+        function openSetStudentCodeModal() {
+            document.getElementById('studentCode').value = appState.currentUser.code;
+            openModal('setStudentCodeModal');
+        }
+
+        // Set student code
+        function setStudentCode() {
+            const code = document.getElementById('studentCode').value.trim();
+            
+            if (!code) {
+                alert('Please enter a code');
+                return;
+            }
+            
+            // Update maker's code
+            appState.currentUser.code = code;
+            
+            // Update all students of this maker
+            appState.students.forEach(student => {
+                if (student.makerId === appState.currentUser.id) {
+                    student.code = code;
+                }
+            });
+            
+            closeModal('setStudentCodeModal');
+            alert('Student code updated successfully!');
+        }
+
+        // Open telegram link modal
+        function openTelegramLinkModal() {
+            document.getElementById('telegramLink').value = appState.makerTelegramLink;
+            openModal('telegramLinkModal');
+        }
+
+        // Set telegram link
+        function setTelegramLink() {
+            const link = document.getElementById('telegramLink').value.trim();
+            
+            if (!link) {
+                alert('Please enter a Telegram link');
+                return;
+            }
+            
+            appState.makerTelegramLink = link;
+            closeModal('telegramLinkModal');
+            alert('Telegram link saved successfully!');
+        }
+
+        // Preview quiz
+        function previewQuiz() {
+            const title = document.getElementById('quizTitle').value.trim();
+            const bulkQuestions = document.getElementById('bulkQuestions').value;
+            
+            if (!title || !bulkQuestions) {
+                alert('Please fill in title and questions to preview');
+                return;
+            }
+            
+            const questions = parseBulkQuestions(bulkQuestions);
+            if (questions.length === 0) {
+                alert('No valid questions found to preview');
+                return;
+            }
+            
+            let previewHTML = `<h3>Quiz Preview: ${title}</h3>`;
+            previewHTML += `<p><strong>Total Questions:</strong> ${questions.length}</p>`;
+            
+            questions.forEach((q, index) => {
+                previewHTML += `
+                    <div class="info-card" style="margin-bottom: 15px;">
+                        <div class="info-title">Q${index + 1}. ${q.text}</div>
+                        <div class="info-content">
+                            <p><strong>A.</strong> ${q.options[0]}</p>
+                            <p><strong>B.</strong> ${q.options[1]}</p>
+                            <p><strong>C.</strong> ${q.options[2]}</p>
+                            <p><strong>D.</strong> ${q.options[3]}</p>
+                            <p><strong>Correct Answer:</strong> ${['A', 'B', 'C', 'D'][q.correctAnswer]}</p>
+                            ${q.explanation ? `<p><strong>Explanation:</strong> ${q.explanation}</p>` : ''}
+                        </div>
+                        <div class="info-actions">
+                            <button class="info-btn delete" onclick="removeQuestion(${index})">
+                                <i class="fas fa-trash"></i> Remove
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            document.getElementById('quizPreviewContent').innerHTML = previewHTML;
+            openModal('quizPreviewModal');
+        }
+
+        // Remove question from preview (placeholder)
+        function removeQuestion(index) {
+            alert(`Question ${index + 1} would be removed in the full implementation`);
+        }
+
+        // Open create quiz modal
+        function openCreateQuizModal() {
+            // Clear form
+            document.getElementById('quizTitle').value = '';
+            document.getElementById('quizDuration').value = '30';
+            document.getElementById('correctMarks').value = '1';
+            document.getElementById('negativeMarks').value = '0.25';
+            document.getElementById('perQuestionTimer').checked = false;
+            document.getElementById('questionTimer').value = '60';
+            document.getElementById('bulkQuestions').value = '';
+            questionTimerGroup.classList.add('d-none');
+            
+            openModal('createQuizModal');
+        }
+
+        // Initialize the app when the page loads
+        window.onload = initApp;
     </script>
 </body>
-</html>
+    </html>
